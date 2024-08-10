@@ -16,7 +16,6 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const axiosPublic = useAxiosPublic();
-  console.log(user)
 
   const handleLogIn = (e) => {
     e.preventDefault();

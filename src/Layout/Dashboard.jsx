@@ -9,8 +9,8 @@ const Dashboard = () => {
     return (
         <div className="max-w-6xl mx-auto mt-10">
         <Navbar></Navbar>
-        <div className='flex my-10 w-1/4'>
-            <div className="drawer md:drawer-open border  ">
+        <div className='flex my-10 '>
+            <div className="drawer md:drawer-open w-1/4 ">
                 <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
                 <div className="drawer-content flex flex-col items-center justify-center">
                     {/* Page content here */}
@@ -20,7 +20,7 @@ const Dashboard = () => {
                 </div>
                 <div className="drawer-side ">
                     <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
-                    <ul className="menu bg-base-200 text-base-content min-h-full w-56 border p-4">
+                    <ul className="menu bg-base-200 text-base-content min-h-full w-56 p-4">
                         {/* Sidebar content here */}
                         {
                             NavLinks
@@ -28,7 +28,7 @@ const Dashboard = () => {
                     </ul>
                 </div>
             </div>
-            <div className='flex-1'>
+            <div className='w-full'>
                 <Outlet></Outlet>
             </div>
         </div>

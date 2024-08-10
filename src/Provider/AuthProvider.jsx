@@ -61,13 +61,13 @@ const AuthProvider = ({ children }) => {
       setUser(currentUser);
       setLoading(false);
 
-      if(currentUser){
-        const loggedUser = {email: currentUser.email};
-        axios.post('https://touro-server.vercel.app/jwt',loggedUser, {withCredentials: true})
-        .then(res=> {
-          console.log(res.data)
-        })
-      }
+      // if(currentUser){
+      //   const loggedUser = {email: currentUser.email};
+      //   axios.post('https://touro-server.vercel.app/jwt',loggedUser, {withCredentials: true})
+      //   .then(res=> {
+      //     console.log(res.data)
+      //   })
+      // }
     });
     return () => {
       unSubscribe();
