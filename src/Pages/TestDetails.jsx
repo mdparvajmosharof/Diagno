@@ -160,13 +160,15 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { FaCalendarDay, FaPlusCircle } from 'react-icons/fa';
 import { useParams } from 'react-router-dom';
+import useAxiosPublic from '../Hooks/useAxiosPublic';
 const TestDetails = () => {
   const { id } = useParams();
   const [test, setTest] = useState({});
   const [promocode, setPromocode] = useState('');
-
+  const axiosPublic = useAxiosPublic()
+ 
   useEffect(() => {
-    axios.get(`http://localhost:5000/test/${id}`)
+    axiosPublic.get(`/test/${id}`)
       .then(res => setTest(res.data));
   }, [id]);
 
