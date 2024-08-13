@@ -1,6 +1,7 @@
 import  { useContext, useEffect, useState } from 'react'
 import useAxiosPublic from '../../Hooks/useAxiosPublic';
 import { AuthContext } from '../../Provider/AuthProvider';
+import Swal from 'sweetalert2';
 
 const MyProfile = () => {
 
@@ -57,7 +58,14 @@ const MyProfile = () => {
     const userInfo = {name, photo_url, blood, districtName, upazila}
     axiosPublic.patch(`/update/profile/${authUser?.email}`, userInfo)
     .then(res=>{
-      console.log(res)
+      if(res.data.modifiedCount){
+        Swal.fire({
+          icon: "success",
+          title: "Register Successful!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
     })
   }
 
