@@ -35,23 +35,12 @@ const Navbar = () => {
       {/* <li>
         <NavLink to="/inquiryForm">Inquiry Form</NavLink>
       </li> */}
-      <li>
-        <NavLink to="/queries">Queries</NavLink>
-      </li>
+      
       {
         user ? <>
         <li>
           <NavLink to="/dashboard">Dashboard</NavLink>
         </li>
-        <li>
-          <NavLink to="/recommendationMe">Recommendation for ME</NavLink>
-        </li>
-          <li>
-            <NavLink to="/myQueries">My Queries</NavLink>
-          </li>
-          <li>
-            <NavLink to="/myRecommendations">My Recommendations</NavLink>
-          </li>
         </> : <></>
       }
     </>

@@ -44,6 +44,23 @@ const MyProfile = () => {
     }
   },[authUser?.email, axiosPublic])
 
+  const handleUpdateProfile = (e) =>{
+    e.preventDefault();
+    const name = e.target.name.value;
+    const photo_url = e.target.photo_url.value;
+    const blood = e.target.blood.value;
+    const upazila = e.target.upazila.value;
+
+    const district = districts.find(dis => dis.id == parseInt(selectedDistrict));
+    const districtName = district ? district.name : '';
+
+    const userInfo = {name, photo_url, blood, districtName, upazila}
+    axiosPublic.patch(`/update/profile/${authUser?.email}`, userInfo)
+    .then(res=>{
+      console.log(res)
+    })
+  }
+
   
 
   return (
@@ -53,7 +70,7 @@ const MyProfile = () => {
         <form
           noValidate=""
           action=""
-          
+          onSubmit={handleUpdateProfile}
         >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 ">
             <div className="space-y-6 ">
@@ -93,6 +110,7 @@ const MyProfile = () => {
                   name="email"
                   id="email"
                   placeholder={user?.email}
+                  disabled
                   className="w-full px-4 py-3 rounded-md input input-success"
                 />
               </div>
@@ -152,9 +170,8 @@ const MyProfile = () => {
               
             </div>
           </div>
-          <button className="block btn btn-accent w-full p-3 text-center rounded-sm mt-6">
-            Update Profile
-          </button>
+          <input type="submit" value="Update Profile" className='block btn btn-accent w-full p-3 text-center rounded-sm mt-6' />
+          
         </form>
 
     

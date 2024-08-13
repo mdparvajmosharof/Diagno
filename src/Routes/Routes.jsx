@@ -3,7 +3,6 @@ import Root from "../Layout/Root"
 import Error from "../Pages/Error";
 import PrivateRoutes from "./PrivateRoutes";
 import Queries from "../Pages/Queries";
-import AddQuery from "../Pages/AddQuery";
 import MyQueries from "../Pages/MyQueries";
 import QueryDetails from "../Pages/QueryDetails";
 import MyRecommendations from "../Pages/MyRecommendations";
@@ -33,10 +32,6 @@ const router = createBrowserRouter([
             },{
                 path: "/allTests",
                 element: <AllTests></AllTests>
-            },
-            {
-                path: "/addQuery",
-                element: <PrivateRoutes><AddQuery></AddQuery></PrivateRoutes>
             },
             {
                 path: "/myQueries",
