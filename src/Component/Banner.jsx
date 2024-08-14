@@ -5,8 +5,34 @@ import "swiper/css/scrollbar";
 import "swiper/css/navigation";
 import { Pagination, Scrollbar, Navigation } from "swiper/modules";
 import { Link } from "react-router-dom";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
+import { useEffect, useState } from "react";
+import Loading from "../Subpage/Loading";
+import { RiCoupon3Fill } from "react-icons/ri";
+import { CiDiscount1 } from "react-icons/ci";
 
 const Banner = () => {
+  const [banner, setBanner] = useState();
+  const [loading, setLoading] = useState(true);
+
+  const axiosPublic = useAxiosPublic();
+  useEffect(()=>{
+    axiosPublic.get("banner")
+    .then((res)=>{
+      setBanner(res.data)
+      setLoading(false)
+    })
+  },[])
+
+  console.log(banner)
+
+  const activeBanners = banner?.filter(banner => banner.isActive);
+  console.log(activeBanners)
+
+  if(loading){
+    return <Loading></Loading>
+  }
+
   return (
     <>
       <Swiper
@@ -14,65 +40,45 @@ const Banner = () => {
         pagination={{ clickable: true }}
         scrollbar={{ draggable: true }}
         modules={[Pagination, Scrollbar, Navigation]}
-        className="mySwiper border h-[550px] rounded-xl my-10"
+        className="mySwiper border  rounded-xl my-10"
       >
-        <SwiperSlide className="">
+        {
+          activeBanners.map(banner=>
+            <SwiperSlide className="">
           <div className="card w-full bg-base-100 shadow-xl image-full">
             <figure>
               <img
-                src="https://i.ibb.co/YT7mR1V/christopher-gower-m-HRf-Lhg-ABo-unsplash.jpg"
+                src={banner.image}
                 alt="Shoes"
+                className="h-2"
               />
             </figure>
-            <div className="card-body flex justify-center items-center">
+            <div className="card-body flex justify-center items-center ">
               <div className="flex justify-center flex-col items-center gap-16">
                 <h2 className="card-title text-5xl font-extrabold text-white ">
-                Your Voice Matters
+                {banner.title}
                 </h2>
-                <p className="text-white font-bold text-2xl">Diagno empowers you to ask, share, and connect. Your queries drive our community forward.</p>
+                <p className="text-white font-bold text-2xl">{banner.text}</p>
                 
               </div>
-            </div>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide className="">
-        <div className="card w-full bg-base-100 shadow-xl image-full">
-            <figure>
-              <img
-                src="https://i.ibb.co/MN5gcHK/kari-shea-1-SAnr-Ixw5-OY-unsplash.jpg"
-                alt="Shoes"
-              />
-            </figure>
-            <div className="card-body flex justify-center items-center">
-              <div className="flex justify-center flex-col items-center gap-16">
-                <h2 className="card-title text-5xl font-extrabold text-white ">
-                Innovative Solutions
-                </h2>
-                <p className="font-bold text-2xl text-white">Explore creative answers and unique solutions to the questions that matter most to you.</p>
+              <div className="flex items-center text-2xl w-full justify-around mt-10 mx-5">
+                <div className="flex items-center gap-2">
+                 <span>Coupon :</span> <RiCoupon3Fill />
+                  {banner.coupon_code}
+                </div>
+                <div className="flex items-center gap-2">
+                  <span>Discount :</span>
+                  <CiDiscount1 />
+                  {banner.discount_rate}
+                </div>
               </div>
+              <Link to={"/alltests"}><button className="btn mt-5 px-10 btn-primary">All Tests</button></Link>
             </div>
           </div>
         </SwiperSlide>
-        <SwiperSlide className="">
-        <div className="card w-full bg-base-100 shadow-xl image-full">
-            <figure>
-              <img
-                src="https://i.ibb.co/Dtjd0s5/unsplash-Nu-FUbft-Uu-s-unsplash.jpg"
-                alt="Shoes"
-              />
-            </figure>
-            <div className="card-body flex justify-center items-center">
-              <div className="flex justify-center flex-col items-center gap-16">
-                <h2 className="card-title text-5xl font-extrabold text-white ">
-                Always Learning
-                </h2>
-                <p className="text-white text-2xl font-bold">
-                Diagno is a place for continuous learning and growth, driven by the curiosity and expertise of our community.
-                </p>
-              </div>
-            </div>
-          </div>
-        </SwiperSlide>
+          )
+        }
+        
        
       </Swiper>
     </>
