@@ -1,40 +1,4 @@
 
-// import axios from 'axios'
-// import React, { useEffect, useState } from 'react'
-// import Loading from '../Subpage/Loading';
-// import TestCard from '../Subpage/TestCard';
-
-// const AllTests = () => {
-
-//     const [tests, setTests] = useState([]);
-//     const [loading, setLoading] = useState(true);
-
-//     useEffect(()=>{
-//         axios.get("http://localhost:5000/tests")
-//         .then(res=>{
-//             console.log(res.data)
-//             setTests(res.data);
-//             setLoading(false);
-//         })
-//     },[])
-//     return (
-//     <div>
-//       {
-//         loading ? (<Loading></Loading>): (
-//             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5  my-10">
-//                 {
-//                     tests.map(test => <TestCard key={test._id} test={test}></TestCard>)
-//                 }
-//             </div>
-//         )
-//       }
-//     </div>
-//   )
-// }
-
-// export default AllTests
-
-
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Loading from '../Subpage/Loading';
