@@ -12,6 +12,7 @@
   "dependencies": {
     "@stripe/react-stripe-js": "^2.7.1",
     "@stripe/stripe-js": "^3.5.0",
+    "@tanstack/react-query": "^5.51.23",
     "aos": "^2.3.4",
     "axios": "^1.6.8",
     "firebase": "^10.10.0",
