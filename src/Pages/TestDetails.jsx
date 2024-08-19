@@ -161,16 +161,23 @@ import React, { useEffect, useState } from 'react';
 import { FaCalendarDay, FaPlusCircle } from 'react-icons/fa';
 import { useParams } from 'react-router-dom';
 import useAxiosPublic from '../Hooks/useAxiosPublic';
+import { useUser } from '../Hooks/useUser';
 const TestDetails = () => {
   const { id } = useParams();
   const [test, setTest] = useState({});
   const [promocode, setPromocode] = useState('');
   const axiosPublic = useAxiosPublic()
+  const user = useUser()
+  console.log(user)
  
   useEffect(() => {
     axiosPublic.get(`/test/${id}`)
       .then(res => setTest(res.data));
   }, [id]);
+
+  const handleAdd = () => {
+        console.log(user);
+    }
 
   return (
     <div className="flex flex-col p-6 space-y-6 overflow-hidden rounded-lg card bg-base-100 shadow-2xl my-10">
@@ -202,6 +209,7 @@ const TestDetails = () => {
             onChange={(e) => setPromocode(e.target.value)} 
             className="input input-bordered w-full mt-4" 
           />
+          <button onClick={handleAdd} className='btn btn-primary mt-4'>Add</button>
         </div>
       </div>
     </div>
