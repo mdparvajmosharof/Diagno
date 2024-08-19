@@ -176,7 +176,14 @@ const TestDetails = () => {
   }, [id]);
 
   const handleAdd = () => {
-        console.log(user);
+          if(user){
+            const bookedtest = {
+              email : user?.email,
+              testId : test._id,
+              image : test.image,
+
+            }
+          }
     }
 
   return (
