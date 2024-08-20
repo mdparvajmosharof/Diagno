@@ -181,9 +181,12 @@ const TestDetails = () => {
               email : user?.email,
               testId : test._id,
               image : test.image,
-
+              title : test.title,
+              price : test.price,
+              promocode : promocode,
             }
           }
+          
     }
 
   return (
