@@ -33,6 +33,7 @@ const TestDetails = () => {
               image : test.image,
               title : test.title,
               price : promocode?  test.price * 0.8 : test.price,
+              date : test.date,
               report: "pending",
             }
 

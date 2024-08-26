@@ -14,6 +14,8 @@ import Login from "../Auth/Login";
 import Resister from "../Auth/Resister";
 import Dashboard from "../Layout/Dashboard";
 import MyProfile from "../Dashboard/MyProfile/MyProfile";
+import UpApointments from "../Dashboard/Upcoming/UpApointments";
+import AllUsers from "../Dashboard/Admin/AllUsers";
 
 
 const router = createBrowserRouter([
@@ -71,6 +73,14 @@ const router = createBrowserRouter([
             {
                 path: "/dashboard",
                 element: <MyProfile></MyProfile>
+            },
+            {
+                path: "/dashboard/upcommingappointment",
+                element: <UpApointments></UpApointments>
+            },
+            {
+                path: "/dashboard/allusers",
+                element: <AllUsers></AllUsers>
             }
         ]
     }
