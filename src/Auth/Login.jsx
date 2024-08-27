@@ -51,7 +51,7 @@ const Login = () => {
           email: res.user?.email,
           name : res.user?.displayName,
           photo_url: res.user?.photoURL,
-          isActive: true
+          isActive: "Active"
       }
       console.log(res)
       console.log(userInfo)

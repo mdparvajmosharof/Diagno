@@ -16,6 +16,7 @@
     "aos": "^2.3.4",
     "axios": "^1.6.8",
     "firebase": "^10.10.0",
+    "jspdf": "^2.5.1",
     "localforage": "^1.10.0",
     "lottie-react": "^2.4.0",
     "match-sorter": "^6.3.4",
