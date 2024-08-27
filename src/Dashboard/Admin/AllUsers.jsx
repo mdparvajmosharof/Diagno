@@ -1,15 +1,26 @@
 import { useQuery } from '@tanstack/react-query'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useAxiosSecure } from '../../Hooks/useAxiosSecure'
 import { MdDeleteForever } from 'react-icons/md';
-import { FaCheck, FaDownload } from 'react-icons/fa';
+import { FaCheck, FaDownload, FaEye } from 'react-icons/fa';
 import { ImCross } from 'react-icons/im';
 import Swal from 'sweetalert2';
 import { FaDownLong } from 'react-icons/fa6';
+import { jsPDF } from "jspdf";
+import { useBooked } from '../../Hooks/useBooked';
 
 const AllUsers = () => {
 
     const axiosSecure = useAxiosSecure();
+    const [email, setEmail] = useState();
+    const [booked, setBooked] = useState();
+
+    useEffect(()=>{
+        axiosSecure.get(`/booked?email=${email}`)
+        .then(res=>{
+            setBooked(res.data);
+        })
+    },[])
 
     const { data: users = [], refetch } = useQuery({
         queryKey: ["users"],
@@ -52,8 +63,28 @@ const AllUsers = () => {
             })
     }
 
-    const handleDownload = () =>{
-            
+    const doc = new jsPDF();
+
+
+
+    const handleDownload = (user) => {
+
+        setEmail(user.email)
+        doc.setFont("helvetica", "bold");
+        doc.text("User Information", 105, 10, null, null, "center");
+        doc.text(`Name: ${user.name}`, 10, 20);
+        doc.text(`User Email: ${user.email}`, 10, 30);
+        doc.text(`Blood: ${user.blood}`, 10, 40);
+        doc.text(`District : ${user.districtName}`, 10, 50);
+        doc.text(`Upazila : ${user.upazila}`, 10, 60);
+        {
+            booked.map((item, idx) => {
+
+                doc.text(`Test Name : ${item.title} ,, Repport : ${item.report}`, 10, 80 + idx * 10);
+            })
+        }
+        doc.save("userinfo.pdf");
+
     }
 
     return (
@@ -67,6 +98,7 @@ const AllUsers = () => {
                         <th>User email</th>
                         <th>isActive</th>
                         <th><FaDownLong></FaDownLong></th>
+                        <th><FaEye></FaEye></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -85,7 +117,24 @@ const AllUsers = () => {
                                     }
 
                                 </td>
-                                <td onClick={handleDownload}><FaDownload></FaDownload></td>
+                                <td onClick={() => handleDownload(user)}><FaDownload></FaDownload></td>
+                                <td>
+                                    {/* Open the modal using document.getElementById('ID').showModal() method */}
+                                    <button className="btn" onClick={() => document.getElementById('my_modal_2').showModal()}>open modal</button>
+                                    <dialog id="my_modal_2" className="modal">
+                                        <div className="modal-box">
+                                            <h3 className="font-bold text-lg">User Information</h3>
+                                            <p className="py-4">{user.name}</p>
+                                            <p className="py-4">{user.email}</p>
+                                            <p className="py-4">{user.districtName}</p>
+                                            <p className="py-4">{user.upazila}</p>
+                                            <p className="py-4">{user.blood}</p>
+                                        </div>
+                                        <form method="dialog" className="modal-backdrop">
+                                            <button>close</button>
+                                        </form>
+                                    </dialog>
+                                </td>
                             </tr>
                         </>)
                     }
