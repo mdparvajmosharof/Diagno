@@ -12,15 +12,19 @@ import { useBooked } from '../../Hooks/useBooked';
 const AllUsers = () => {
 
     const axiosSecure = useAxiosSecure();
-    const [email, setEmail] = useState();
-    const [booked, setBooked] = useState();
+    const [email, setEmail] = useState('');
+    const [booked, setBooked] = useState([]);
+
+    console.log(email)
 
     useEffect(()=>{
         axiosSecure.get(`/booked?email=${email}`)
         .then(res=>{
             setBooked(res.data);
         })
-    },[])
+    },[email])
+
+    console.log(booked)
 
     const { data: users = [], refetch } = useQuery({
         queryKey: ["users"],
@@ -78,7 +82,7 @@ const AllUsers = () => {
         doc.text(`District : ${user.districtName}`, 10, 50);
         doc.text(`Upazila : ${user.upazila}`, 10, 60);
         {
-            booked.map((item, idx) => {
+            booked.forEach((item, idx) => {
 
                 doc.text(`Test Name : ${item.title} ,, Repport : ${item.report}`, 10, 80 + idx * 10);
             })

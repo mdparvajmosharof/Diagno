@@ -12,12 +12,14 @@ import {
 import auth from "../Firebase/firebase.config";
 import { createContext, useEffect, useState } from "react";
 import axios from "axios";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
 
 export const AuthContext = createContext(null);
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const axiosPublic = useAxiosPublic();
   
   const googleProvider = new GoogleAuthProvider();
   const githubProvider = new GithubAuthProvider();
@@ -59,20 +61,29 @@ const AuthProvider = ({ children }) => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       console.log("current user: ", currentUser);
       setUser(currentUser);
-      setLoading(false);
 
-      // if(currentUser){
-      //   const loggedUser = {email: currentUser.email};
-      //   axios.post('https://touro-server.vercel.app/jwt',loggedUser, {withCredentials: true})
-      //   .then(res=> {
-      //     console.log(res.data)
-      //   })
-      // }
+      if(currentUser){
+          const userInfo = {
+            email : currentUser.email
+          }
+          axiosPublic.post('/jwt', userInfo)
+          .then(res =>{
+            console.log(res.data)
+            if(res.data.token){
+              localStorage.setItem('access-token', res.data.token);
+
+            }
+          })
+      }
+      else{
+        localStorage.removeItem('access-token')
+      }
+      setLoading(false)
     });
     return () => {
       unSubscribe();
     };
-  }, []);
+  }, [axiosPublic]);
 
   const authInfo = {
     loading,
