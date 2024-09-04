@@ -20,6 +20,7 @@ import AdminRoutes from "./AdminRoutes";
 import AddTest from "../Dashboard/Admin/AddTest";
 import AllTest from "../Dashboard/Admin/AllTest";
 import UpdateTest from "../Dashboard/Admin/UpdateTest";
+import Resevation from "../Dashboard/Admin/Resevation";
 
 
 const router = createBrowserRouter([
@@ -97,6 +98,10 @@ const router = createBrowserRouter([
             {
                 path: "/dashboard/updatetest/:id",
                 element:<AdminRoutes><UpdateTest></UpdateTest></AdminRoutes>
+            },
+            {
+                path: "/dashboard/reservation/:id",
+                element:<AdminRoutes><Resevation></Resevation></AdminRoutes>
             }
         ]
     }

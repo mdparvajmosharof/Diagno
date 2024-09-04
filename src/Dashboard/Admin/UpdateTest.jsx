@@ -4,6 +4,8 @@ import { useAxiosSecure } from '../../Hooks/useAxiosSecure';
 import { useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
+import Loading from '../../Subpage/Loading';
+import Swal from 'sweetalert2';
 
 const imgbb_key = import.meta.env.VITE_IMGBB_API;
 const img_hosting_api = `https://api.imgbb.com/1/upload?key=${imgbb_key}`;
@@ -14,17 +16,15 @@ const UpdateTest = () => {
     const axiosSecure = useAxiosSecure();
     const {id} = useParams();
 
-    console.log(id)
-
-    const {data:test} = useQuery({
+    const {data: test = {}, isPending, refetch} = useQuery({
         queryKey:["test"],
-        queryFnz: async()=>{
-            const res = await axiosPublic.get(`/test/${id}`)
-            return res.data;
+        queryFn: async()=>{
+            const result = await axiosPublic.get(`/test/${id}`)
+            return result.data;
         }
     })
 
-    console.log(test)
+    // console.log(test)
 
     const onSubmit = async (data) => {
         console.log(data)
@@ -43,15 +43,17 @@ const UpdateTest = () => {
                 date: data.date,
                 short_description: data.short_description
             }
-            const testRes = await axiosSecure.post('/tests', testsData);
+            console.log(testsData)
+            const testRes = await axiosSecure.patch(`/test/${id}`, testsData);
             console.log(testRes.data)
-            if (testRes.data.insertedId) {
+            if (testRes.data.modifiedCount) {
                 // show success popup
                 reset();
+                refetch();
                 Swal.fire({
                     position: "center",
                     icon: "success",
-                    title: `${data.testName} is added to the menu.`,
+                    title: `${data.testName} is updated to the menu.`,
                     showConfirmButton: false,
                     timer: 1500
                 });
@@ -59,15 +61,20 @@ const UpdateTest = () => {
         }
 
     }
+
+    if(isPending){
+        return  <Loading></Loading>
+    }
+
     return (
         <div>
             <form onSubmit={handleSubmit(onSubmit)} className='space-y-5 md:ml-10'>
 
-                <label className="form-control w-full">
+                <label  className="form-control w-full">
                     <div className="label">
                         <span className="label-text">Test Name* : </span>
                     </div>
-                    <input {...register("testName", { required: true })} type="text" placeholder="Test Name" className="input input-bordered w-full " />
+                    <input defaultValue={test?.title} {...register("testName", { required: true })} type="text" placeholder="Test Name" className="input input-bordered w-full " />
 
                 </label>
 
@@ -90,7 +97,7 @@ const UpdateTest = () => {
                             <div className="label">
                                 <span className="label-text">Price* : </span>
                             </div>
-                            <input {...register("price", { required: true })} type="text" placeholder="Price" className="input input-bordered w-full " />
+                            <input defaultValue={test?.price} {...register("price", { required: true })} type="text" placeholder="Price" className="input input-bordered w-full " />
 
                         </label>
                     </div>
@@ -104,7 +111,7 @@ const UpdateTest = () => {
                             <div className="label">
                                 <span className="label-text">Date* : </span>
                             </div>
-                            <input {...register('date')} className='input input-bordered w-full' type="date" id='date' />
+                            <input defaultValue={test?.date} {...register('date')} className='input input-bordered w-full' type="date" id='date' />
                         </label>
                     </div>
 
@@ -114,7 +121,7 @@ const UpdateTest = () => {
                                 <span className="label-text">Slots* : </span>
                             </div>
                             <select {...register("slots", { required: true })} defaultValue={"default"} className="select select-bordered w-full">
-                                <option disabled value={"default"}>Pick one</option>
+                                <option disabled value={"default"}>{test.slots}</option>
                                 <option>8</option>
                                 <option>10</option>
                                 <option>12</option>
@@ -129,7 +136,7 @@ const UpdateTest = () => {
                     <div className="label">
                         <span className="label-text">Short Description* : </span>
                     </div>
-                    <textarea {...register("short_description", { required: true })} className="textarea textarea-bordered h-24" placeholder="Bio"></textarea>
+                    <textarea defaultValue={test.short_description} {...register("short_description", { required: true })} className="textarea textarea-bordered h-24" placeholder="Bio"></textarea>
 
                 </label>
 

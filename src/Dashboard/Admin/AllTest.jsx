@@ -75,9 +75,10 @@ const AllTest = () => {
                       <Link to={`/dashboard/updatetest/${test._id}`}><div className='btn btn-primary btn-outline'>Update</div></Link>
                     </td>
                     <td >
-                      <div className='btn btn-primary btn-outline'>
+                      <Link to={`/dashboard/reservation/${test._id}`}><div className='btn btn-primary btn-outline'>
                         <IoMdEye></IoMdEye>
-                      </div>
+                      </div></Link>
+                      
                     </td>
                   </tr>
                 </>

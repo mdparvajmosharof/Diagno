@@ -2,10 +2,12 @@ import { useContext, useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
 import { Tooltip } from 'react-tooltip'
+import useAdmin from "../Hooks/useAdmin";
 
 const Navbar = () => {
   const { authInfo } = useContext(AuthContext);
   const { logOut, user } = authInfo;
+  const [isAdmin] = useAdmin()
 
   console.log(user)
 
@@ -35,13 +37,17 @@ const Navbar = () => {
       {/* <li>
         <NavLink to="/inquiryForm">Inquiry Form</NavLink>
       </li> */}
-      
+
       {
-        user ? <>
-        <li>
-          <NavLink to="/dashboard">Dashboard</NavLink>
-        </li>
-        </> : <></>
+
+        user && !isAdmin && <>
+          <li>
+            <NavLink to="/dashboard">Dashboard</NavLink>
+          </li>
+        </>
+      }
+      {
+        user && isAdmin && <li><NavLink to="/dashboard/allusers">Dashboard</NavLink></li>
       }
     </>
   );

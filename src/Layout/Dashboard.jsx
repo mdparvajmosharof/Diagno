@@ -2,10 +2,11 @@ import React from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
 import Navbar from '../Component/Navbar'
 import useAdmin from '../Hooks/useAdmin';
+import Loading from '../Subpage/Loading';
 
 const Dashboard = () => {
 
-    const [isAdmin] = useAdmin();
+    const [isAdmin,isAdminLoading] = useAdmin();
 
     const NavLinks = isAdmin ?
         <>
@@ -17,6 +18,10 @@ const Dashboard = () => {
             <li><NavLink to={"/dashboard"}>My Profile</NavLink></li>
             <li><NavLink to={"/dashboard/upcommingappointment"}>Upcomming Appointment</NavLink></li>
         </>
+
+        if(isAdminLoading){
+            return <Loading></Loading>
+        }
 
     return (
         <div className="max-w-6xl mx-auto mt-10">
