@@ -6,7 +6,7 @@ import { useUser } from './useUser'
 export const useBooked = () => {
 
     const axiosSecure = useAxiosSecure()
-    const user = useUser();
+    const [user] = useUser();
     const {data: booked=[], refetch} = useQuery({
 
         queryKey : ['booked', user?.email],

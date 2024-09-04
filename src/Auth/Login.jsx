@@ -16,6 +16,7 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const axiosPublic = useAxiosPublic();
+  console.log(location)
 
   const handleLogIn = (e) => {
     e.preventDefault();
@@ -65,7 +66,7 @@ const Login = () => {
         showConfirmButton: false,
         timer: 1500,
       })
-      // navigate(location?.state ? location.state : "/");
+      navigate(location?.state ? location.state : "/");
     })
     .catch(() => {
       Swal.fire({
@@ -96,7 +97,6 @@ const Login = () => {
     });
   };
 
-  console.log(name);
   return (
     <div>
       <div className="w-full max-w-md p-8 space-y-3 rounded-xl card shadow-xl mx-auto">

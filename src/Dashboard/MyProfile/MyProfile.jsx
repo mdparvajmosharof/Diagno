@@ -3,6 +3,7 @@ import useAxiosPublic from '../../Hooks/useAxiosPublic';
 import { AuthContext } from '../../Provider/AuthProvider';
 import Swal from 'sweetalert2';
 import Loading from '../../Subpage/Loading';
+import { useAxiosSecure } from '../../Hooks/useAxiosSecure';
 
 const MyProfile = () => {
 
@@ -35,17 +36,17 @@ const MyProfile = () => {
   console.log(authUser?.email)
 
 
-  const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
 
   useEffect(() => {
     if (authUser?.email) {
-      axiosPublic.get(`/users/${authUser?.email}`)
+      axiosSecure.get(`/users/${authUser?.email}`)
         .then((res) => {
           setUser(res.data)
           setLoading(false)
         })
     }
-  }, [authUser?.email, axiosPublic])
+  }, [authUser?.email, axiosSecure])
 
   const handleUpdateProfile = (e) => {
     e.preventDefault();

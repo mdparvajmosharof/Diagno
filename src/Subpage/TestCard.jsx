@@ -38,7 +38,7 @@ import { FaCalendarDay, FaPlusCircle } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 const TestCard = ({ test }) => {
-  const { image, date, slots, title, short_description, _id } = test;
+  const { image, date, slots, title, short_description, _id, price } = test;
   const shortArr = short_description.split(" ");
   const shortSlc = shortArr.length >= 10 ? shortArr.slice(0, 10).join(" ") : short_description;
 
@@ -46,7 +46,10 @@ const TestCard = ({ test }) => {
     <div className="card card-compact w-96 bg-base-100 shadow-xl">
       <figure><img src={image} alt="image" /></figure>
       <div className="card-body">
+        <div className='flex justify-between'>
         <h2 className="card-title">{title}</h2>
+        <h2>$ {price}</h2>
+        </div>
         <p>{shortSlc}</p>
         <div className='flex justify-between'>
           <div className='flex items-center gap-2'>
@@ -59,8 +62,8 @@ const TestCard = ({ test }) => {
             <span>{date}</span>
           </div>
         </div>
-        <div className="card-actions justify-end">
-          <Link to={`/testDetails/${_id}`}><button className='btn'>Details</button></Link>
+        <div className="">
+          <Link to={`/testDetails/${_id}`}><button className='btn btn-primary w-full mt-3'>Details</button></Link>
         </div>
       </div>
     </div>

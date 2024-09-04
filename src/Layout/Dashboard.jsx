@@ -1,14 +1,17 @@
 import React from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
 import Navbar from '../Component/Navbar'
+import useAdmin from '../Hooks/useAdmin';
 
 const Dashboard = () => {
 
-    const admin = true;
+    const [isAdmin] = useAdmin();
 
-    const NavLinks = admin ?
+    const NavLinks = isAdmin ?
         <>
             <li><NavLink to={"/dashboard/allusers"}>All User</NavLink></li>
+            <li><NavLink to={"/dashboard/addtest"}>Add Test</NavLink></li>
+            <li><NavLink to={"/dashboard/alltest"}>All Test</NavLink></li>
         </> :
         <>
             <li><NavLink to={"/dashboard"}>My Profile</NavLink></li>

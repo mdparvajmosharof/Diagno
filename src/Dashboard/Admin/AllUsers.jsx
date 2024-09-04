@@ -12,19 +12,6 @@ import { useBooked } from '../../Hooks/useBooked';
 const AllUsers = () => {
 
     const axiosSecure = useAxiosSecure();
-    const [email, setEmail] = useState('');
-    const [booked, setBooked] = useState([]);
-
-    console.log(email)
-
-    useEffect(()=>{
-        axiosSecure.get(`/booked?email=${email}`)
-        .then(res=>{
-            setBooked(res.data);
-        })
-    },[email])
-
-    console.log(booked)
 
     const { data: users = [], refetch } = useQuery({
         queryKey: ["users"],
@@ -54,7 +41,6 @@ const AllUsers = () => {
     const handleBlocked = (userId) => {
         axiosSecure.patch(`/users/blocked/${userId}`)
             .then(res => {
-                console.log(res.data)
                 refetch()
                 if (res.data.modifiedCount) {
                     Swal.fire({
@@ -67,28 +53,52 @@ const AllUsers = () => {
             })
     }
 
-    const doc = new jsPDF();
+    
 
 
 
-    const handleDownload = (user) => {
+    const handleDownload = async (user) => {
 
-        setEmail(user.email)
-        doc.setFont("helvetica", "bold");
-        doc.text("User Information", 105, 10, null, null, "center");
-        doc.text(`Name: ${user.name}`, 10, 20);
-        doc.text(`User Email: ${user.email}`, 10, 30);
-        doc.text(`Blood: ${user.blood}`, 10, 40);
-        doc.text(`District : ${user.districtName}`, 10, 50);
-        doc.text(`Upazila : ${user.upazila}`, 10, 60);
-        {
-            booked.forEach((item, idx) => {
+        try {
+            const res = await axiosSecure.get(`/booked?email=${user.email}`);
+            const booked = res.data
 
-                doc.text(`Test Name : ${item.title} ,, Repport : ${item.report}`, 10, 80 + idx * 10);
-            })
+            const doc = new jsPDF();
+
+            doc.setFont("helvetica", "bold");
+            doc.text("User Information", 105, 10, null, null, "center");
+            doc.text(`Name: ${user.name}`, 10, 20);
+            doc.text(`User Email: ${user.email}`, 10, 30);
+            doc.text(`Blood: ${user.blood}`, 10, 40);
+            doc.text(`District : ${user.districtName}`, 10, 50);
+            doc.text(`Upazila : ${user.upazila}`, 10, 60);
+            {
+                booked.forEach((item, idx) => {
+
+                    doc.text(`Test Name : ${item.title} ,, Repport : ${item.report}`, 10, 80 + idx * 10);
+                })
+            }
+            doc.save("userinfo.pdf");
+        }catch(err){
+            console.error("Error generating PDF:", error);
         }
-        doc.save("userinfo.pdf");
 
+    }
+
+    const handleMakeAdmin = (user) => {
+        axiosSecure.patch(`/users/admin/${user._id}`)
+            .then(res => {
+                refetch()
+                if (res.data.modifiedCount) {
+                    Swal.fire({
+                        icon: "success",
+                        title: `${user.name} is an admin now!`,
+                        showConfirmButton: false,
+                        timer: 1500,
+                    });
+                }
+
+            })
     }
 
     return (
@@ -103,6 +113,7 @@ const AllUsers = () => {
                         <th>isActive</th>
                         <th><FaDownLong></FaDownLong></th>
                         <th><FaEye></FaEye></th>
+                        <th>Role</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -124,20 +135,25 @@ const AllUsers = () => {
                                 <td onClick={() => handleDownload(user)}><FaDownload></FaDownload></td>
                                 <td>
                                     {/* Open the modal using document.getElementById('ID').showModal() method */}
-                                    <button className="btn" onClick={() => document.getElementById('my_modal_2').showModal()}>open modal</button>
-                                    <dialog id="my_modal_2" className="modal">
-                                        <div className="modal-box">
+                                    <button className="btn" onClick={() => document.getElementById(`modal_${user._id}`).showModal()}><FaEye></FaEye></button>
+                                    <dialog id={`modal_${user._id}`} className="modal">
+                                        <div className="modal-box flex items-center flex-col">
                                             <h3 className="font-bold text-lg">User Information</h3>
-                                            <p className="py-4">{user.name}</p>
-                                            <p className="py-4">{user.email}</p>
-                                            <p className="py-4">{user.districtName}</p>
-                                            <p className="py-4">{user.upazila}</p>
-                                            <p className="py-4">{user.blood}</p>
+                                            <p className="py-4">Name : {user.name}</p>
+                                            <p className="py-4">Email : {user.email}</p>
+                                            <p className="py-4">District : {user.districtName}</p>
+                                            <p className="py-4">Upazila : {user.upazila}</p>
+                                            <p className="py-4">Blood : {user.blood}</p>
                                         </div>
                                         <form method="dialog" className="modal-backdrop">
-                                            <button>close</button>
+                                            <button className='btn'>close</button>
                                         </form>
                                     </dialog>
+                                </td>
+                                <td>
+                                    {
+                                        user?.role === 'admin' ? <button>Admin</button> : <button onClick={()=>handleMakeAdmin(user)}>User</button>
+                                    }
                                 </td>
                             </tr>
                         </>)

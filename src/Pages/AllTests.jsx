@@ -18,7 +18,7 @@ const AllTests = () => {
         setTests(res.data);
         setLoading(false);
       });
-  }, []);
+  }, [axiosPublic]);
 
   
     const handleSearch = () => {

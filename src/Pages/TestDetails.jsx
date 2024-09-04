@@ -13,7 +13,7 @@ const TestDetails = () => {
   const [promocode, setPromocode] = useState('');
   const axiosPublic = useAxiosPublic()
   const axiosSecure = useAxiosSecure();
-  const user = useUser()
+  const [user] = useUser()
 
   const {data: test={}, refetch} = useQuery({
     queryKey: ['test'],

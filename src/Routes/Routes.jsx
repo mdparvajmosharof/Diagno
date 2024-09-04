@@ -16,6 +16,10 @@ import Dashboard from "../Layout/Dashboard";
 import MyProfile from "../Dashboard/MyProfile/MyProfile";
 import UpApointments from "../Dashboard/Upcoming/UpApointments";
 import AllUsers from "../Dashboard/Admin/AllUsers";
+import AdminRoutes from "./AdminRoutes";
+import AddTest from "../Dashboard/Admin/AddTest";
+import AllTest from "../Dashboard/Admin/AllTest";
+import UpdateTest from "../Dashboard/Admin/UpdateTest";
 
 
 const router = createBrowserRouter([
@@ -72,15 +76,27 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "/dashboard",
-                element: <MyProfile></MyProfile>
+                element: <PrivateRoutes><MyProfile></MyProfile></PrivateRoutes>
             },
             {
                 path: "/dashboard/upcommingappointment",
-                element: <UpApointments></UpApointments>
+                element: <PrivateRoutes><UpApointments></UpApointments></PrivateRoutes>
             },
             {
                 path: "/dashboard/allusers",
-                element: <AllUsers></AllUsers>
+                element: <AdminRoutes><AllUsers></AllUsers></AdminRoutes>
+            },
+            {
+                path: "/dashboard/addtest",
+                element: <AdminRoutes><AddTest></AddTest></AdminRoutes>
+            },
+            {
+                path: "/dashboard/alltest",
+                element: <AdminRoutes><AllTest></AllTest></AdminRoutes>
+            },
+            {
+                path: "/dashboard/updatetest/:id",
+                element:<AdminRoutes><UpdateTest></UpdateTest></AdminRoutes>
             }
         ]
     }
