@@ -10,7 +10,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import auth from "../Firebase/firebase.config";
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 
@@ -85,7 +85,7 @@ const AuthProvider = ({ children }) => {
     };
   }, [axiosPublic]);
 
-  const authInfo = {
+  const authInfo = useMemo(()=>({
     loading,
     user,
     createUser,
@@ -94,7 +94,7 @@ const AuthProvider = ({ children }) => {
     googleLogIn,
     githubLogIn,
     updateUserProfile,
-  };
+  }),[LogInUser, user])
 
 
   return (

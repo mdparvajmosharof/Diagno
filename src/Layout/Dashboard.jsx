@@ -19,6 +19,7 @@ const Dashboard = () => {
         <>
             <li><NavLink to={"/dashboard"}>My Profile</NavLink></li>
             <li><NavLink to={"/dashboard/upcommingappointment"}>Upcomming Appointment</NavLink></li>
+            <li><NavLink to={"/dashboard/testresult"}>Test Result</NavLink></li>
         </>
 
         if(isAdminLoading){
@@ -29,7 +30,7 @@ const Dashboard = () => {
         <div className="max-w-6xl mx-auto mt-10">
             <Navbar></Navbar>
             <div className='flex my-10 '>
-                <div className="drawer md:drawer-open w-1/4 ">
+                <div className="drawer md:drawer-open w-2/5 ">
                     <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
                     <div className="drawer-content flex flex-col items-center justify-center">
                         {/* Page content here */}

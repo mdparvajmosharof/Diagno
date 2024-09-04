@@ -8,7 +8,7 @@ import useAxiosPublic from "../Hooks/useAxiosPublic";
 
 const Login = () => {
   useEffect(() => {
-    document.title = "Diagno | Log In"; // Quick solution
+    document.title = "Diagno | Log In"; 
   }, []);
 
   const { authInfo } = useContext(AuthContext);
@@ -16,6 +16,7 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const axiosPublic = useAxiosPublic();
+  console.log("Login component rendered");
   console.log(location)
 
   const handleLogIn = (e) => {
