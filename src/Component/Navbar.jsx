@@ -9,8 +9,6 @@ const Navbar = () => {
   const { logOut, user } = authInfo;
   const [isAdmin] = useAdmin()
 
-  console.log(user)
-
   const handleSignOut = () => {
     console.log("log out click");
     logOut()

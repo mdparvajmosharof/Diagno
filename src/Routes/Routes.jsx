@@ -21,6 +21,8 @@ import AddTest from "../Dashboard/Admin/AddTest";
 import AllTest from "../Dashboard/Admin/AllTest";
 import UpdateTest from "../Dashboard/Admin/UpdateTest";
 import Resevation from "../Dashboard/Admin/Resevation";
+import AddBanner from "../Dashboard/Admin/AddBanner";
+import AllBanner from "../Dashboard/Admin/AllBanner";
 
 
 const router = createBrowserRouter([
@@ -102,6 +104,14 @@ const router = createBrowserRouter([
             {
                 path: "/dashboard/reservation/:id",
                 element:<AdminRoutes><Resevation></Resevation></AdminRoutes>
+            },
+            {
+                path: "/dashboard/addbanner",
+                element:<AdminRoutes><AddBanner></AddBanner></AdminRoutes>
+            },
+            {
+                path: "/dashboard/allbanner",
+                element:<AdminRoutes><AllBanner></AllBanner></AdminRoutes>
             }
         ]
     }

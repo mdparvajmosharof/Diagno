@@ -4,10 +4,13 @@ import useAxiosPublic from '../../Hooks/useAxiosPublic'
 import { useParams } from 'react-router-dom'
 import { MdDelete } from 'react-icons/md'
 import Loading from '../../Subpage/Loading'
+import Swal from 'sweetalert2'
+import { useAxiosSecure } from '../../Hooks/useAxiosSecure'
 
 const Reservation = () => {
     const [searchData, setSearchData] = useState('')
-    const axiosPublic = useAxiosPublic()
+    const axiosPublic = useAxiosPublic();
+    const axiosSecure = useAxiosSecure();
     const { id } = useParams();
 
     const { data: reservations = [], refetch, isPending } = useQuery({
@@ -29,10 +32,41 @@ const Reservation = () => {
         ? reservations.filter(r => r.email.toLowerCase().includes(searchData.toLowerCase()))
         : reservations;
 
+    const handleDelete = (rId) => {
+        axiosSecure.delete(`booked/${rId}`)
+            .then(res => {
+                if (res.data.deletedCount) {
+                    refetch();
+                    Swal.fire({
+                        icon: "success",
+                        title: "Deleted Successfully!",
+                        showConfirmButton: false,
+                        timer: 1500,
+                    });
+                }
+            })
+    }
 
-        if(isPending){
-          return <Loading></Loading>
-        }
+    const handleReport = (r) =>{
+        axiosSecure.patch(`booked/${r._id}`)
+        .then(res=>{
+            console.log(res.data)
+            if(res.data.modifiedCount){
+                refetch();
+                Swal.fire({
+                    icon: "success",
+                    title: "Report Delevered",
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+            }
+        })
+    }
+
+
+    if (isPending) {
+        return <Loading></Loading>
+    }
 
     return (
         <div>
@@ -70,7 +104,7 @@ const Reservation = () => {
                                     <div className='btn btn-primary btn-outline' onClick={() => handleDelete(r._id)}><MdDelete></MdDelete></div>
                                 </td>
                                 <td>
-                                    <button className='btn btn-primary btn-outline'>Report Submit</button>
+                                    <button onClick={()=>handleReport(r)} className='btn btn-primary btn-outline'>Report Submit</button>
                                 </td>
                             </tr>
                         )}

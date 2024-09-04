@@ -10,6 +10,8 @@ const UpApointments = () => {
     const [booked, refetch] = useBooked();
     const axiosSecure = useAxiosSecure();
 
+    console.log(booked)
+
     const handleCancel = (id) => {
 
         Swal.fire({
@@ -21,20 +23,21 @@ const UpApointments = () => {
             cancelButtonColor: "#d33",
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
-            axiosSecure.delete(`/booked/${id}`)
-                .then(res => {
-                    if (res.data.deletedCount) {
-                        refetch()
-                        if (result.isConfirmed) {
+            if (result.isConfirmed) {
+                axiosSecure.delete(`/booked/${id}`)
+                    .then(res => {
+                        if (res.data.deletedCount) {
+                            refetch()
+
                             Swal.fire({
                                 title: "Deleted!",
                                 text: "Your file has been deleted.",
                                 icon: "success"
                             });
-                        }
-                    }
-                })
 
+                        }
+                    })
+            }
         });
 
     }
@@ -49,6 +52,7 @@ const UpApointments = () => {
                             <th>#</th>
                             <th>Test Name</th>
                             <th>Appointment Date</th>
+                            <th>Report</th>
                             <th>Cancel</th>
                         </tr>
                     </thead>
@@ -60,6 +64,7 @@ const UpApointments = () => {
                                     <th>{idx + 1}</th>
                                     <td>{item.title}</td>
                                     <td>{item.date}</td>
+                                    <td>{item.report}</td>
                                     <td onClick={() => handleCancel(item._id)}><MdDeleteForever /></td>
                                 </tr>
                             </>)

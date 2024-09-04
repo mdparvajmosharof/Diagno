@@ -13,6 +13,8 @@ const Dashboard = () => {
             <li><NavLink to={"/dashboard/allusers"}>All User</NavLink></li>
             <li><NavLink to={"/dashboard/addtest"}>Add Test</NavLink></li>
             <li><NavLink to={"/dashboard/alltest"}>All Test</NavLink></li>
+            <li><NavLink to={"/dashboard/addbanner"}>Add Banner</NavLink></li>
+            <li><NavLink to={"/dashboard/allbanner"}>All Banner</NavLink></li>
         </> :
         <>
             <li><NavLink to={"/dashboard"}>My Profile</NavLink></li>
