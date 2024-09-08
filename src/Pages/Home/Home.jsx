@@ -1,12 +1,9 @@
 import { useEffect, useState } from "react";
 import Banner from "../../Component/Banner";
-// import Estate from "../Component/Estate";
 import Footer from "../../Component/Footer";
-import Navbar from "../../Component/Navbar";
-// import { useLoaderData } from "react-router-dom";
-import HomeQuery from "../HomeQuery";
-import { Link } from "react-router-dom";
 import SubBanner from "../../Subpage/SubBanner";
+import Featured from "./Featured";
+import Promotional from "../Promotional";
 
 const Home = () => {
   const [mySpots, setMySpots] = useState([]);
@@ -44,31 +41,9 @@ const Home = () => {
     <div>
       <Banner></Banner>
       <SubBanner></SubBanner>
+      <Featured></Featured>
+      <Promotional></Promotional>
 
-     
-
-      {/* <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-8">
-        {estates.map((estate) => (
-          <Estate key={estate.id} estate={estate}></Estate>
-        ))}
-      </div> */}
-
-      <div className="w-full flex justify-center my-10 ">
-        <h1 className=" font-extrabold mx-auto text-3xl">Recent Queries</h1>
-      </div>
-      <HomeQuery></HomeQuery>
-      {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {mySpots.map((mySpot) => (
-          <AllMySpot key={mySpot._id} mySpot={mySpot}></AllMySpot>
-        ))}
-      </div> */}
-     
-
-      {/* gall */}
-
-      <div></div>
-
-      {/* ask question */}
 
       <div className="my-20 card shadow-xl rounded-xl">
         <section className="py-6   rounded-xl">

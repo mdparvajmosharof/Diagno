@@ -41,6 +41,7 @@ const AllTests = () => {
         />
         <button onClick={handleSearch} className="btn btn-primary ml-2">Search</button>
       </div>
+      <div className='flex justify-center'>
       {
         loading ? (<Loading></Loading>) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 my-10">
@@ -48,6 +49,7 @@ const AllTests = () => {
           </div>
         )
       }
+      </div>
     </div>
   );
 };
