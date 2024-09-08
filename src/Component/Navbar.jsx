@@ -40,7 +40,7 @@ const Navbar = () => {
 
         user && !isAdmin && <>
           <li>
-            <NavLink to="/dashboard">Dashboard</NavLink>
+            <NavLink to="/dashboard/myprofile">Dashboard</NavLink>
           </li>
         </>
       }

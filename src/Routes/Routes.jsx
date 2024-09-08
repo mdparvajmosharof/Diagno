@@ -23,6 +23,7 @@ import UpdateTest from "../Dashboard/Admin/UpdateTest";
 import Resevation from "../Dashboard/Admin/Resevation";
 import AddBanner from "../Dashboard/Admin/AddBanner";
 import AllBanner from "../Dashboard/Admin/AllBanner";
+import TestResult from "../Dashboard/TestResult";
 
 
 const router = createBrowserRouter([
@@ -74,16 +75,20 @@ const router = createBrowserRouter([
     },
     {
         path: "dashboard",
-        element:<Dashboard></Dashboard>,
+        element:<PrivateRoutes><Dashboard></Dashboard></PrivateRoutes>,
         errorElement: <Error></Error>,
         children: [
             {
-                path: "/dashboard",
-                element: <PrivateRoutes><MyProfile></MyProfile></PrivateRoutes>
+                path: "/dashboard/myprofile",
+                element: <MyProfile></MyProfile>
             },
             {
                 path: "/dashboard/upcommingappointment",
-                element: <PrivateRoutes><UpApointments></UpApointments></PrivateRoutes>
+                element: <UpApointments></UpApointments>
+            },
+            {
+                path: "/dashboard/testresults",
+                element: <TestResult></TestResult>
             },
             {
                 path: "/dashboard/allusers",
@@ -112,7 +117,7 @@ const router = createBrowserRouter([
             {
                 path: "/dashboard/allbanner",
                 element:<AdminRoutes><AllBanner></AllBanner></AdminRoutes>
-            }
+            },
         ]
     }
 ])

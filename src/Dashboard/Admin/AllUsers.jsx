@@ -80,7 +80,7 @@ const AllUsers = () => {
             }
             doc.save("userinfo.pdf");
         }catch(err){
-            console.error("Error generating PDF:", error);
+            console.error("Error generating PDF:", err);
         }
 
     }
@@ -146,7 +146,7 @@ const AllUsers = () => {
                                             <p className="py-4">Blood : {user.blood}</p>
                                         </div>
                                         <form method="dialog" className="modal-backdrop">
-                                            <button className='btn'>close</button>
+                                            <button>close</button>
                                         </form>
                                     </dialog>
                                 </td>
