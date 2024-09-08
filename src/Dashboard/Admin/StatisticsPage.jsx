@@ -15,8 +15,8 @@ const StatisticsPage = () => {
       console.log(res.data)
       if (res.data && Array.isArray(res.data)) {
         const formattedData = res.data.map(item => ({
-          name: item.testDetails.title, // Service names
-          bookings: item.count, // Booking counts
+          name: item.testDetails.title,
+          bookings: item.count, 
         }));
         setBookedData(formattedData);
         setLoading(false);

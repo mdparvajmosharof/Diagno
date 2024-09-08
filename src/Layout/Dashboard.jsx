@@ -18,6 +18,7 @@ const Dashboard = () => {
     const axiosSecure = useAxiosSecure()
 
     useEffect(() => {
+        console.log(authUser)
         if (authUser?.email) {
             axiosSecure.get(`/users/${authUser?.email}`)
                 .then((res) => {
@@ -25,7 +26,7 @@ const Dashboard = () => {
                     setLoading(false)
                 })
         }
-    }, [authUser?.email, axiosSecure])
+    }, [authUser?.email])
 
     const NavLinks = isAdmin ?
         <>

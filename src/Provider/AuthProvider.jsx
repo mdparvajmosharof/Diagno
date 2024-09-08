@@ -20,7 +20,7 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const axiosPublic = useAxiosPublic();
-  
+
   const googleProvider = new GoogleAuthProvider();
   const githubProvider = new GithubAuthProvider();
 
@@ -30,7 +30,7 @@ const AuthProvider = ({ children }) => {
   };
 
   const updateUserProfile = (name, photo_url) => {
-    
+
     return updateProfile(auth.currentUser, {
       displayName: name,
       photoURL: photo_url,
@@ -62,23 +62,25 @@ const AuthProvider = ({ children }) => {
       console.log("current user: ", currentUser);
       setUser(currentUser);
 
-      if(currentUser){
-          const userInfo = {
-            email : currentUser.email
-          }
-          axiosPublic.post('/jwt', userInfo)
-          .then(res =>{
+      if (currentUser) {
+        const userInfo = {
+          email: currentUser.email
+        }
+        axiosPublic.post('/jwt', userInfo)
+          .then(res => {
             console.log(res.data)
-            if(res.data.token){
+            if (res.data.token) {
               localStorage.setItem('access-token', res.data.token);
+              setLoading(false)
 
             }
           })
       }
-      else{
+      else {
         localStorage.removeItem('access-token')
+        setLoading(false)
+
       }
-      setLoading(false)
     });
     return () => {
       unSubscribe();
