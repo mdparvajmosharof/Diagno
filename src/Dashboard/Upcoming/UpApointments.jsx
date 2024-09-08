@@ -60,7 +60,7 @@ const UpApointments = () => {
 
                         {
                             booked.map((item, idx) => <>
-                                <tr className="hover">
+                                <tr key={item._id} className="hover">
                                     <th>{idx + 1}</th>
                                     <td>{item.title}</td>
                                     <td>{item.date}</td>

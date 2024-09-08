@@ -3,8 +3,6 @@ import Root from "../Layout/Root"
 import Error from "../Pages/Error";
 import PrivateRoutes from "./PrivateRoutes";
 import Queries from "../Pages/Queries";
-import MyQueries from "../Pages/MyQueries";
-import QueryDetails from "../Pages/QueryDetails";
 import MyRecommendations from "../Pages/MyRecommendations";
 import RecommendationsForMe from "../Pages/RecommendationsForMe";
 import AllTests from "../Pages/AllTests";
@@ -24,6 +22,7 @@ import Resevation from "../Dashboard/Admin/Resevation";
 import AddBanner from "../Dashboard/Admin/AddBanner";
 import AllBanner from "../Dashboard/Admin/AllBanner";
 import TestResult from "../Dashboard/TestResult";
+import StatisticsPage from "../Dashboard/Admin/StatisticsPage";
 
 
 const router = createBrowserRouter([
@@ -43,14 +42,7 @@ const router = createBrowserRouter([
                 path: "/allTests",
                 element: <AllTests></AllTests>
             },
-            {
-                path: "/myQueries",
-                element: <PrivateRoutes><MyQueries></MyQueries></PrivateRoutes>
-            },
-            {
-                path:"/queryDetails/:id",
-                element: <QueryDetails></QueryDetails>
-            },
+           
             {
                 path:"/testDetails/:id",
                 element:<TestDetails></TestDetails>
@@ -117,6 +109,10 @@ const router = createBrowserRouter([
             {
                 path: "/dashboard/allbanner",
                 element:<AdminRoutes><AllBanner></AllBanner></AdminRoutes>
+            },
+            {
+                path: "/dashboard/chart",
+                element:<AdminRoutes><StatisticsPage></StatisticsPage></AdminRoutes>
             },
         ]
     }

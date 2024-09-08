@@ -43,6 +43,7 @@ const AllUsers = () => {
             .then(res => {
                 refetch()
                 if (res.data.modifiedCount) {
+                    refetch()
                     Swal.fire({
                         icon: "success",
                         title: "User Blocked",
@@ -120,7 +121,7 @@ const AllUsers = () => {
 
                     {
                         users.map((user, idx) => <>
-                            <tr className="hover">
+                            <tr key={user._id} className="hover">
                                 <th>{idx + 1}</th>
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>

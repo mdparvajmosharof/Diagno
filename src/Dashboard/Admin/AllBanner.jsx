@@ -50,7 +50,7 @@ const AllBanner = () => {
                         {
                             banners.map((banner, idx) =>
                                 <>
-                                    <tr className="hover text-lg">
+                                    <tr key={banner._id} className="hover text-lg">
                                         <th>{idx + 1}</th>
                                         <td>
                                             <div className="flex items-center gap-3">

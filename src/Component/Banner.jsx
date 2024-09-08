@@ -44,7 +44,7 @@ const Banner = () => {
       >
         {
           activeBanners.map(banner=>
-            <SwiperSlide className="">
+            <SwiperSlide key={banner._id} className="">
           <div className="card w-full bg-base-100 shadow-xl image-full">
             <figure>
               <img

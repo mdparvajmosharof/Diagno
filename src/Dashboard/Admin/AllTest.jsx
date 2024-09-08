@@ -63,7 +63,7 @@ const AllTest = () => {
             {
               tests.map((test, idx) =>
                 <>
-                  <tr className="hover text-lg">
+                  <tr key={test._id} className="hover text-lg">
                     <th>{idx + 1}</th>
                     <td>{test.title}</td>
                     <td>{test.slots}</td>

@@ -4,45 +4,27 @@ import Footer from "../../Component/Footer";
 import SubBanner from "../../Subpage/SubBanner";
 import Featured from "./Featured";
 import Promotional from "../Promotional";
+import Recommendation from "./Recommendation";
 
 const Home = () => {
-  const [mySpots, setMySpots] = useState([]);
-  const [country, setCountry] = useState([]);
-
-  useEffect(() => {
-    fetch(
-      `https://touro-server.vercel.app/myspots`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setMySpots(data);
-      });
-  }, []);
-
+ 
   useEffect(() => {
     document.title = "Diagno";
   }, []);
 
-  useEffect(() => {
-    fetch(
-      "https://touro-server.vercel.app/country"
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setCountry(data);
-      });
-  }, []);
-
-  // const estates = useLoaderData();
 
   return (
     <div>
       <Banner></Banner>
       <SubBanner></SubBanner>
+
+      <div className="text-3xl text-center mt-5 shadow-xl font-bold">
+        Featured Tests
+      </div>
+
       <Featured></Featured>
       <Promotional></Promotional>
+      <Recommendation></Recommendation>
 
 
       <div className="my-20 card shadow-xl rounded-xl">

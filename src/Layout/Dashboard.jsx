@@ -1,12 +1,31 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
 import Navbar from '../Component/Navbar'
 import useAdmin from '../Hooks/useAdmin';
 import Loading from '../Subpage/Loading';
+import { useUser } from '../Hooks/useUser';
+import { useAxiosSecure } from '../Hooks/useAxiosSecure';
+import Footer from '../Component/Footer';
 
 const Dashboard = () => {
 
-    const [isAdmin,isAdminLoading] = useAdmin();
+    const [isAdmin, isAdminLoading] = useAdmin();
+    const [user] = useUser();
+    const [TheUser, setUser] = useState()
+    const [loading, setLoading] = useState(true)
+    const authUser = user;
+
+    const axiosSecure = useAxiosSecure()
+
+    useEffect(() => {
+        if (authUser?.email) {
+            axiosSecure.get(`/users/${authUser?.email}`)
+                .then((res) => {
+                    setUser(res.data)
+                    setLoading(false)
+                })
+        }
+    }, [authUser?.email, axiosSecure])
 
     const NavLinks = isAdmin ?
         <>
@@ -15,6 +34,7 @@ const Dashboard = () => {
             <li><NavLink to={"/dashboard/alltest"}>All Test</NavLink></li>
             <li><NavLink to={"/dashboard/addbanner"}>Add Banner</NavLink></li>
             <li><NavLink to={"/dashboard/allbanner"}>All Banner</NavLink></li>
+            <li><NavLink to={"/dashboard/chart"}>Chart</NavLink></li>
         </> :
         <>
             <li><NavLink to={"/dashboard/myprofile"}>My Profile</NavLink></li>
@@ -22,9 +42,19 @@ const Dashboard = () => {
             <li><NavLink to={"/dashboard/testresults"}>Test Results</NavLink></li>
         </>
 
-        if(isAdminLoading){
-            return <Loading></Loading>
-        }
+    if (isAdminLoading || loading) {
+        return <Loading></Loading>
+    }
+
+    console.log(TheUser.isActive)
+
+    if (TheUser.isActive === "blocked") {
+
+        return <>
+            <Navbar></Navbar>
+            <div className='text-center mt-10'>You are Blocked by Admin</div>
+        </>
+    }
 
     return (
         <div className="max-w-6xl mx-auto mt-10">
@@ -52,6 +82,7 @@ const Dashboard = () => {
                     <Outlet></Outlet>
                 </div>
             </div>
+            <Footer></Footer>
         </div>
     )
 }

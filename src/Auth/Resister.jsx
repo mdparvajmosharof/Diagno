@@ -56,7 +56,7 @@ const Resister = () => {
     const blood = e.target.blood.value;
     const upazila = e.target.upazila.value;
     const confirm_password = e.target.confirm_password.value;
-    const isActive = true;
+    const isActive = "active";
 
     const district = districts.find(dis => dis.id == parseInt(selectedDistrict));
     const districtName = district ? district.name : '';
