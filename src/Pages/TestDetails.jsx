@@ -7,6 +7,8 @@ import { useUser } from '../Hooks/useUser';
 import { useAxiosSecure } from '../Hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
 import { useQuery } from '@tanstack/react-query';
+import Loading from '../Subpage/Loading';
+import Payment from '../Dashboard/Payment/Payment';
 
 const TestDetails = () => {
   const { id } = useParams();
@@ -15,53 +17,71 @@ const TestDetails = () => {
   const axiosSecure = useAxiosSecure();
   const [user] = useUser()
 
-  const {data: test={}, refetch} = useQuery({
+  const { data: test = {}, refetch, isPending } = useQuery({
     queryKey: ['test'],
-    queryFn: async () =>{
+    queryFn: async () => {
       const res = await axiosPublic.get(`/test/${id}`);
       return res.data;
     }
   })
 
-  
+
+  const [newPrice, setNewPrice] = useState(test.price);
+
+  console.log(newPrice)
+
+  const handleApply = () => {
+    if (promocode === 'HEALTH20' || promocode === "health20") {
+      const np = test.price * 0.8;
+      setNewPrice(np);
+    }
+    else {
+      setNewPrice(test.price)
+    }
+  }
+
 
   const handleAdd = () => {
-          if(user){
-            const bookedtest = {
-              email : user?.email,
-              testId : test._id,
-              image : test.image,
-              title : test.title,
-              price : promocode?  test.price * 0.8 : test.price,
-              date : test.date,
-              report: "pending",
-            }
+    if (user) {
+      const bookedtest = {
+        email: user?.email,
+        testId: test._id,
+        image: test.image,
+        title: test.title,
+        price: newPrice ?  newPrice : test.price,
+        date: test.date,
+        report: "pending",
+      }
 
-            axiosSecure.post("/booked", bookedtest)
-            .then(res=>{
-              if(res.data.insertedId){
-                Swal.fire({
-                  position: "center",
-                  icon: "success",
-                  title: "Your work has been saved",
-                  showConfirmButton: false,
-                  timer: 1500
-                });
-              }
-
-              axiosPublic.patch(`/test/${id}`,  { slots: test.slots - 1 })
-              .then((res)=>{
-                console.log(res.data)
-                refetch()
-              })
-
-            })
+      axiosSecure.post("/booked", bookedtest)
+        .then(res => {
+          if (res.data.insertedId) {
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: "Your work has been saved",
+              showConfirmButton: false,
+              timer: 1500
+            });
           }
-          
+
+          axiosPublic.patch(`/test/${id}`, { slots: test.slots - 1 })
+            .then((res) => {
+              console.log(res.data)
+              refetch()
+            })
+
+        })
     }
 
+  }
+
+  if (isPending) {
+    return <Loading></Loading>
+  }
+
   return (
-    <div className="flex flex-col p-6 space-y-6 overflow-hidden rounded-lg card bg-base-100 shadow-2xl my-10">
+    <div key={test._id} className="flex flex-col p-6 space-y-6 overflow-hidden rounded-lg card bg-base-100 shadow-2xl my-10">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-2 pt-6 items-center">
         <div>
           <img src={test.image} alt="" className="object-cover w-full mb-4 rounded-lg bg-gray-500 dark:bg-gray-500" />
@@ -69,7 +89,10 @@ const TestDetails = () => {
         <div>
           <div>
             <p>{test.test_name}</p>
-            <h2 className="mb-1 h-14 font-extrabold">{test.title}</h2>
+            <div className='flex justify-between'>
+              <h2 className="mb-1 h-14 font-extrabold">{test.title}</h2>
+              <p className='text-emerald-600'>$ {test.price}</p>
+            </div>
             <p className="text-sm text-gray-600 dark:text-gray-400">{test.short_description}</p>
           </div>
           <div className='flex justify-between mt-6'>
@@ -83,17 +106,35 @@ const TestDetails = () => {
               <span>{test.date}</span>
             </div>
           </div>
-          <input 
-            type="text" 
-            placeholder="Promocode" 
-            value={promocode} 
-            onChange={(e) => setPromocode(e.target.value)} 
-            className="input input-bordered w-full mt-4" 
-          />
+          <div className='text-xs mt-5 text-green-500'>
+            use 'HEALTH20' for 20% DISCOUNT
+          </div>
+          <div className='flex w-full mt-5'>
+            <div className='w-full'>
+              <input
+                type="text"
+                placeholder="Promocode"
+                onChange={(e) => setPromocode(e.target.value)}
+                className="input input-bordered rounded-r-none w-full"
+              />
+            </div>
+
+            <button onClick={handleApply} className='btn btn-outline rounded-l-none'>Apply</button>
+          </div>
+          {promocode === 'HEALTH20' || promocode === "health20"
+            ? < div className='mt-5 flex justify-between' >
+              <div>Final Price : </div>
+              <div className='text-emerald-600 font-bold'>$ {newPrice}</div>
+            </div>
+            : newPrice && <div className='text-red-500 mt-1'>Write the promocode correctly!!!</div>
+          }
+          <div className='mt-5'>
+            <Payment price={newPrice}></Payment>
+          </div>
           <button onClick={handleAdd} className='btn btn-primary mt-4'>Add</button>
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 

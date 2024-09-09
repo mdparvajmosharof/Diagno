@@ -45,7 +45,7 @@ const router = createBrowserRouter([
            
             {
                 path:"/testDetails/:id",
-                element:<TestDetails></TestDetails>
+                element:<PrivateRoutes><TestDetails></TestDetails></PrivateRoutes>
             },
             {
                 path: "/myRecommendations",

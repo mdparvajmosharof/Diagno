@@ -11,7 +11,6 @@ const AllTests = () => {
   const [loading, setLoading] = useState(true);
   const [searchDate, setSearchDate] = useState('');
 
-
   useEffect(() => {
     axiosPublic.get("tests")
       .then(res => {
@@ -28,7 +27,9 @@ const AllTests = () => {
         });
     };
   
-  
+    if(loading ){
+      return <Loading></Loading>
+    }
 
   return (
     <div>
@@ -42,13 +43,12 @@ const AllTests = () => {
         <button onClick={handleSearch} className="btn btn-primary ml-2">Search</button>
       </div>
       <div className='flex justify-center'>
-      {
-        loading ? (<Loading></Loading>) : (
+       (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 my-10">
             {tests.map(test => <TestCard key={test._id} test={test}></TestCard>)}
           </div>
         )
-      }
+      
       </div>
     </div>
   );
