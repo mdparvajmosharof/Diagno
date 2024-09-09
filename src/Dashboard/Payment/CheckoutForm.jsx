@@ -3,10 +3,11 @@ import React, { useEffect, useState } from 'react'
 import { useAxiosSecure } from '../../Hooks/useAxiosSecure';
 import { useUser } from '../../Hooks/useUser';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 
 
-const CheckoutForm = ({price}) => {
+const CheckoutForm = ({ price }) => {
     const stripe = useStripe();
     const elements = useElements();
     const [error, setError] = useState("")
@@ -18,38 +19,38 @@ const CheckoutForm = ({price}) => {
     console.log(price)
 
     useEffect(() => {
-        if(price>0){
+        if (price > 0) {
             axiosSecure.post('/create-payment-intent', { price: price })
-            .then(res => {
-                console.log(res.data.clientSecret);
-                setClientSecret(res.data.clientSecret);
-            })
+                .then(res => {
+                    console.log(res.data.clientSecret);
+                    setClientSecret(res.data.clientSecret);
+                })
         }
-        
-      }, [axiosSecure, price]);
 
-    const handleSubmit = async (e) =>{
+    }, [axiosSecure, price]);
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if(!stripe || !elements){
+        if (!stripe || !elements) {
             return;
         }
 
         const card = elements.getElement(CardElement);
 
-        if(card == null){
+        if (card == null) {
             return;
         }
 
-        const {error, paymentMethod} = await stripe.createPaymentMethod({
+        const { error, paymentMethod } = await stripe.createPaymentMethod({
             type: 'card',
             card,
         });
 
-        if(error){
+        if (error) {
             console.log(error)
             setError(error.message)
-        }else{
+        } else {
             console.log(paymentMethod)
             setError('')
         }
@@ -78,15 +79,12 @@ const CheckoutForm = ({price}) => {
                     email: user.email,
                     price: price,
                     transactionId: paymentIntent.id,
-                    date: new Date(), // utc date convert. use moment js to 
-                    cartIds: cart.map(item => item._id),
-                    menuItemIds: cart.map(item => item.menuId),
+                    date: new Date(), // utc date convert. use moment js to
                     status: 'pending'
                 }
 
                 const res = await axiosSecure.post('/payments', payment);
                 console.log('payment saved', res.data);
-                refetch();
                 if (res.data?.paymentResult?.insertedId) {
                     Swal.fire({
                         position: "top-end",
@@ -95,7 +93,7 @@ const CheckoutForm = ({price}) => {
                         showConfirmButton: false,
                         timer: 1500
                     });
-                    navigate('/dashboard/paymentHistory')
+                    navigate('/dashboard/apointments')
                 }
 
             }
@@ -124,9 +122,10 @@ const CheckoutForm = ({price}) => {
                     }}
                 />
                 <p className='text-red-500 text-sm mt-1'>{error}</p>
-                <button className='btn btn-outline btn-primary mt-5 w-full' type="submit" disabled={!stripe}>
+                <button className="btn btn-primary my-4 btn-outline w-full" type="submit" disabled={!stripe || !clientSecret}>
                     Pay
                 </button>
+                {transactionId && <p className="text-green-600"> Your transaction id: {transactionId}</p>}
             </form>
         </div>
     )
