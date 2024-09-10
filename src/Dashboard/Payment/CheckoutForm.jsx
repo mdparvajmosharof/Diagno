@@ -27,7 +27,7 @@ const CheckoutForm = ({ price }) => {
                 })
         }
 
-    }, [axiosSecure, price]);
+    }, [axiosSecure,price]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -75,26 +75,26 @@ const CheckoutForm = ({ price }) => {
                 setTransactionId(paymentIntent.id);
 
                 // now save the payment in the database
-                const payment = {
-                    email: user.email,
-                    price: price,
-                    transactionId: paymentIntent.id,
-                    date: new Date(), // utc date convert. use moment js to
-                    status: 'pending'
-                }
+                // const payment = {
+                //     email: user.email,
+                //     price: price,
+                //     transactionId: paymentIntent.id,
+                //     date: new Date(), // utc date convert. use moment js to
+                //     status: 'pending'
+                // }
 
-                const res = await axiosSecure.post('/payments', payment);
-                console.log('payment saved', res.data);
-                if (res.data?.paymentResult?.insertedId) {
-                    Swal.fire({
-                        position: "top-end",
-                        icon: "success",
-                        title: "Thank you for the taka paisa",
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
-                    navigate('/dashboard/apointments')
-                }
+                // const res = await axiosSecure.post('/payments', payment);
+                // console.log('payment saved', res.data);
+                // if (res.data?.paymentResult?.insertedId) {
+                //     Swal.fire({
+                //         position: "top-end",
+                //         icon: "success",
+                //         title: "Thank you for the taka paisa",
+                //         showConfirmButton: false,
+                //         timer: 1500
+                //     });
+                //     navigate('/dashboard/apointments')
+                // }
 
             }
         }

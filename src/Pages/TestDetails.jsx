@@ -26,7 +26,7 @@ const TestDetails = () => {
   })
 
 
-  const [newPrice, setNewPrice] = useState(test.price);
+  const [newPrice, setNewPrice] = useState();
 
   console.log(newPrice)
 
@@ -129,7 +129,7 @@ const TestDetails = () => {
             : newPrice && <div className='text-red-500 mt-1'>Write the promocode correctly!!!</div>
           }
           <div className='mt-5'>
-            <Payment price={newPrice}></Payment>
+            <Payment price={newPrice ?  newPrice : test.price}></Payment>
           </div>
           <button onClick={handleAdd} className='btn btn-primary mt-4'>Add</button>
         </div>
