@@ -24,7 +24,7 @@ const StatisticsPage = () => {
     };
 
     const fetchDeliveryRatio = async () => {
-      const res = await axiosSecure.get('/booked/delevered');
+      const res = await axiosSecure.get('/booked/test');
       if (res.data && Array.isArray(res.data)) {
         const completedCount = res.data.filter(item => item.report === 'delivered').length;
         const pendingCount = res.data.filter(item => item.report === 'pending').length;

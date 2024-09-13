@@ -85,7 +85,7 @@ const Home = () => {
                 <input
                   type="text"
                   placeholder="Leroy Jenkins"
-                  className="block w-full border p-4 rounded-md shadow-sm focus:ring focus:ring-opacity-75 focus:ring-violet-400 focus: bg-gray-800 "
+                  className="block w-full border p-4 rounded-md shadow-sm focus:ring focus:ring-opacity-75 "
                 />
               </label>
               <label className="block">
@@ -93,19 +93,19 @@ const Home = () => {
                 <input
                   type="email"
                   placeholder="leroy@jenkins.com"
-                  className="block w-full border p-4 rounded-md shadow-sm focus:ring focus:ring-opacity-75 focus:ring-violet-400 focus: bg-gray-800 "
+                  className="block w-full border p-4 rounded-md shadow-sm focus:ring focus:ring-opacity-75 "
                 />
               </label>
               <label className="block">
                 <span className="mb-1">Message</span>
                 <textarea
                   rows="3"
-                  className="block w-full border p-4 rounded-md focus:ring focus:ring-opacity-75 focus:ring-violet-400 focus: bg-gray-800 "
+                  className="block w-full border p-4 rounded-md focus:ring focus:ring-opacity-75 "
                 ></textarea>
               </label>
               <button
                 type="button"
-                className="self-center  px-8 py-3 text-lg rounded focus:ring hover:ring focus:ring-opacity-75 bg-violet-400  text-gray-900  focus:ring-violet-400 focus: hover:ring-violet-400 hover:"
+                className="self-center  px-8 py-3 text-lg rounded focus:ring hover:ring focus:ring-opacity-75 "
               >
                 Submit
               </button>
