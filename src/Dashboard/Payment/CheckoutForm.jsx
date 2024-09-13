@@ -7,7 +7,7 @@ import Swal from 'sweetalert2';
 
 
 
-const CheckoutForm = ({ price }) => {
+const CheckoutForm = ({ price, test, refetch }) => {
     const stripe = useStripe();
     const elements = useElements();
     const [error, setError] = useState("")
@@ -27,7 +27,7 @@ const CheckoutForm = ({ price }) => {
                 })
         }
 
-    }, [axiosSecure,price]);
+    }, [axiosSecure, price]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -36,7 +36,7 @@ const CheckoutForm = ({ price }) => {
             return;
         }
 
-        const card = elements.getElement(CardElement);
+        const card = elements.getElement(CardElement)
 
         if (card == null) {
             return;
@@ -73,6 +73,44 @@ const CheckoutForm = ({ price }) => {
             if (paymentIntent.status === 'succeeded') {
                 console.log('transaction id', paymentIntent.id);
                 setTransactionId(paymentIntent.id);
+
+                const bookedtest = {
+                    email: user?.email,
+                    testId: test._id,
+                    image: test.image,
+                    title: test.title,
+
+                    price: price,
+                    transactionId: paymentIntent.id,
+                    date: test.date,
+                    report: "pending",
+
+                }
+
+                const res = await axiosSecure.post("/booked", bookedtest)
+
+                console.log(res.data)
+
+
+                axiosSecure.patch(`/test/${test._id}`, { slots: test.slots - 1 })
+                    .then((res) => {
+                        console.log(res.data)
+
+                        refetch()
+
+                        if (res.data.modifiedCount) {
+                            Swal.fire({
+                                position: "center",
+                                icon: "success",
+                                title: `${test.title} is booked`,
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                        }
+
+                        navigate('/dashboard/upcommingappointment')
+                    })
+
 
                 // now save the payment in the database
                 // const payment = {

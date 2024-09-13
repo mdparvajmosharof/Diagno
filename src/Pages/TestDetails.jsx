@@ -42,37 +42,48 @@ const TestDetails = () => {
 
 
   const handleAdd = () => {
-    if (user) {
-      const bookedtest = {
-        email: user?.email,
-        testId: test._id,
-        image: test.image,
-        title: test.title,
-        price: newPrice ?  newPrice : test.price,
-        date: test.date,
-        report: "pending",
-      }
 
-      axiosSecure.post("/booked", bookedtest)
-        .then(res => {
-          if (res.data.insertedId) {
-            Swal.fire({
-              position: "center",
-              icon: "success",
-              title: "Your work has been saved",
-              showConfirmButton: false,
-              timer: 1500
-            });
-          }
-
-          axiosPublic.patch(`/test/${id}`, { slots: test.slots - 1 })
-            .then((res) => {
-              console.log(res.data)
-              refetch()
-            })
-
-        })
+    if (test.slots <= 0) {
+      Swal.fire({
+        icon: 'error',
+        title: 'No slots available',
+        text: 'Please try again later.',
+      });
+      return;
     }
+
+    document.getElementById('payemnt_modal').showModal()
+    // if (user) {
+    //   const bookedtest = {
+    //     email: user?.email,
+    //     testId: test._id,
+    //     image: test.image,
+    //     title: test.title,
+    //     price: newPrice ? newPrice : test.price,
+    //     date: test.date,
+    //     report: "pending",
+    //   }
+
+    //   axiosSecure.post("/booked", bookedtest)
+    //     .then(res => {
+    //       if (res.data.insertedId) {
+    //         Swal.fire({
+    //           position: "center",
+    //           icon: "success",
+    //           title: "Your work has been saved",
+    //           showConfirmButton: false,
+    //           timer: 1500
+    //         });
+    //       }
+
+    //       axiosPublic.patch(`/test/${id}`, { slots: test.slots - 1 })
+    //         .then((res) => {
+    //           console.log(res.data)
+    //           refetch()
+    //         })
+
+    //     })
+    // }
 
   }
 
@@ -106,7 +117,19 @@ const TestDetails = () => {
               <span>{test.date}</span>
             </div>
           </div>
-          <div className='text-xs mt-5 text-green-500'>
+          
+
+          <button onClick={handleAdd} className='btn btn-primary mt-4'>Book Now</button>
+
+
+          <dialog id="payemnt_modal" className="modal">
+            <div className="modal-box m-24 ">
+              <form method="dialog">
+                <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+              </form>
+              <h3 className="font-bold text-xl text-center">PayMent!</h3>
+
+              <div className='text-xs mt-5 text-green-500'>
             use 'HEALTH20' for 20% DISCOUNT
           </div>
           <div className='flex w-full mt-5'>
@@ -121,17 +144,22 @@ const TestDetails = () => {
 
             <button onClick={handleApply} className='btn btn-outline rounded-l-none'>Apply</button>
           </div>
-          {promocode === 'HEALTH20' || promocode === "health20"
-            ? < div className='mt-5 flex justify-between' >
-              <div>Final Price : </div>
-              <div className='text-emerald-600 font-bold'>$ {newPrice}</div>
+
+              {promocode === 'HEALTH20' || promocode === "health20"
+                ? < div className='mt-5 flex justify-between' >
+                  <div>Final Price : </div>
+                  <div className='text-emerald-600 font-bold'>$ {newPrice}</div>
+                </div>
+                : newPrice && <div className='text-red-500 mt-1'>Write the promocode correctly!!!</div>
+              }
+
+              <div className='mt-5'>
+                <Payment price={newPrice ? newPrice : test.price} test={test} refetch={refetch} ></Payment>
+              </div>
+
+              <p className="py-4 text-center ">Press ESC key or click on ✕ button to close</p>
             </div>
-            : newPrice && <div className='text-red-500 mt-1'>Write the promocode correctly!!!</div>
-          }
-          <div className='mt-5'>
-            <Payment price={newPrice ?  newPrice : test.price}></Payment>
-          </div>
-          <button onClick={handleAdd} className='btn btn-primary mt-4'>Add</button>
+          </dialog>
         </div>
       </div>
     </div >
