@@ -32,9 +32,16 @@ const Navbar = () => {
       <li>
         <NavLink to="/">Home</NavLink>
       </li>
-      {/* <li>
+      <li>
         <NavLink to="/inquiryForm">Inquiry Form</NavLink>
-      </li> */}
+      </li>
+      <li>
+        <NavLink to="/healthaware">Health Aware</NavLink>
+      </li>
+      <li>
+        <NavLink to="/services">Services</NavLink>
+      </li>
+
 
       {
 

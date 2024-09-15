@@ -8,9 +8,8 @@ const InquiryForm = () => {
   }, []);
   return (
     <div>
-      <Navbar></Navbar>
 
-      <section className="p-6 bg-gray-100 text-gray-900">
+      <section className="p-6 card shadow-xl">
         <div className=" flex justify-center py-10">
           <h1 className="mx-auto text-4xl font-bold text-blue-500">
             Inquiry Form

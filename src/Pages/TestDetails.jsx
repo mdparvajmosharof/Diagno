@@ -25,10 +25,19 @@ const TestDetails = () => {
     }
   })
 
+  const {data : theUser} = useQuery({
+    queryKey: ["theUser"],
+    queryFn: async() =>{
+      const res = await axiosSecure.get(`/users/${user.email}`)
+      return res.data;
+    }
+  })
+
+  console.log(theUser.isActive)
+  console.log(user.email)
+
 
   const [newPrice, setNewPrice] = useState();
-
-  console.log(newPrice)
 
   const handleApply = () => {
     if (promocode === 'HEALTH20' || promocode === "health20") {
@@ -42,6 +51,15 @@ const TestDetails = () => {
 
 
   const handleAdd = () => {
+
+    if(theUser.isActive === "blocked"){
+      Swal.fire({
+        icon: 'error',
+        title: 'BLOCKED',
+        text: 'You are blocked by admin',
+      });
+        return ;
+    }
 
     if (test.slots <= 0) {
       Swal.fire({

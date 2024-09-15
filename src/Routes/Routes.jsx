@@ -2,9 +2,6 @@ import { createBrowserRouter } from "react-router-dom"
 import Root from "../Layout/Root"
 import Error from "../Pages/Error";
 import PrivateRoutes from "./PrivateRoutes";
-import Queries from "../Pages/Queries";
-import MyRecommendations from "../Pages/MyRecommendations";
-import RecommendationsForMe from "../Pages/RecommendationsForMe";
 import AllTests from "../Pages/AllTests";
 import TestDetails from "../Pages/TestDetails";
 import Home from "../Pages/Home/Home";
@@ -23,6 +20,9 @@ import AddBanner from "../Dashboard/Admin/AddBanner";
 import AllBanner from "../Dashboard/Admin/AllBanner";
 import TestResult from "../Dashboard/TestResult";
 import StatisticsPage from "../Dashboard/Admin/StatisticsPage";
+import HealthAwareness from "../Pages/HealthAwareness";
+import InquiryForm from "../Pages/InquiryForm";
+import Testimonials from "../Pages/Testimonials";
 
 
 const router = createBrowserRouter([
@@ -34,11 +34,8 @@ const router = createBrowserRouter([
             {
                 path:"/",
                 element:<Home></Home>,
-                loader: () => fetch('/estates.json')
-            },{
-                path: "/queries",
-                element: <Queries></Queries>
-            },{
+            },
+            {
                 path: "/allTests",
                 element: <AllTests></AllTests>
             },
@@ -48,12 +45,16 @@ const router = createBrowserRouter([
                 element:<PrivateRoutes><TestDetails></TestDetails></PrivateRoutes>
             },
             {
-                path: "/myRecommendations",
-                element: <PrivateRoutes><MyRecommendations></MyRecommendations></PrivateRoutes>
+                path: "/healthaware",
+                element: <HealthAwareness></HealthAwareness>
             },
             {
-                path: "/recommendationMe",
-                element: <PrivateRoutes><RecommendationsForMe></RecommendationsForMe></PrivateRoutes>
+                path: "/inquiryForm",
+                element: <InquiryForm></InquiryForm>
+            },
+            {
+                path: "/services",
+                element: <Testimonials></Testimonials>
             },
             {
                 path:"/login",
