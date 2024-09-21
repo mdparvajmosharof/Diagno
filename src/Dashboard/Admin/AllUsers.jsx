@@ -104,7 +104,7 @@ const AllUsers = () => {
 
     return (
         <div className="overflow-x-auto">
-            <table className="table">
+            <table className="table ">
                 {/* head */}
                 <thead>
                     <tr>
@@ -125,7 +125,7 @@ const AllUsers = () => {
                                 <th>{idx + 1}</th>
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
-                                <td >
+                                <td className='text-blue-800 dark:text-indigo-500'>
                                     {
                                         user.isActive === "Active" ?
                                             <button onClick={() => handleBlocked(user._id)}><ImCross /></button> :
@@ -133,10 +133,10 @@ const AllUsers = () => {
                                     }
 
                                 </td>
-                                <td onClick={() => handleDownload(user)}><FaDownload></FaDownload></td>
+                                <td className='text-blue-800 dark:text-indigo-500' onClick={() => handleDownload(user)}><FaDownload></FaDownload></td>
                                 <td>
                                     {/* Open the modal using document.getElementById('ID').showModal() method */}
-                                    <button className="btn" onClick={() => document.getElementById(`modal_${user._id}`).showModal()}><FaEye></FaEye></button>
+                                    <button className="btn btn-primary btn-outline" onClick={() => document.getElementById(`modal_${user._id}`).showModal()}><FaEye></FaEye></button>
                                     <dialog id={`modal_${user._id}`} className="modal">
                                         <div className="modal-box flex items-center flex-col">
                                             <h3 className="font-bold text-lg">User Information</h3>
@@ -151,7 +151,7 @@ const AllUsers = () => {
                                         </form>
                                     </dialog>
                                 </td>
-                                <td>
+                                <td className='text-blue-800 dark:text-indigo-500'>
                                     {
                                         user?.role === 'admin' ? <button>Admin</button> : <button onClick={()=>handleMakeAdmin(user)}>User</button>
                                     }

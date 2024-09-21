@@ -43,6 +43,15 @@ const TestResult = () => {
         )
     }
 
+    if(DeliveredTests.length == 0){
+        return (
+            <div className='flex justify-center mt-10'>
+                <div> You didn't book any Test. </div>
+               
+            </div>
+        )
+    }
+
   return (
     <div>
        <div className="overflow-x-auto">

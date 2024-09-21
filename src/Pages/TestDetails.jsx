@@ -25,17 +25,13 @@ const TestDetails = () => {
     }
   })
 
-  const {data : theUser} = useQuery({
+  const { data: theUser } = useQuery({
     queryKey: ["theUser"],
-    queryFn: async() =>{
+    queryFn: async () => {
       const res = await axiosSecure.get(`/users/${user.email}`)
       return res.data;
     }
   })
-
-  console.log(theUser.isActive)
-  console.log(user.email)
-
 
   const [newPrice, setNewPrice] = useState();
 
@@ -52,13 +48,13 @@ const TestDetails = () => {
 
   const handleAdd = () => {
 
-    if(theUser.isActive === "blocked"){
+    if (theUser?.isActive === "blocked") {
       Swal.fire({
         icon: 'error',
         title: 'BLOCKED',
         text: 'You are blocked by admin',
       });
-        return ;
+      return;
     }
 
     if (test.slots <= 0) {
@@ -70,38 +66,7 @@ const TestDetails = () => {
       return;
     }
 
-    document.getElementById('payemnt_modal').showModal()
-    // if (user) {
-    //   const bookedtest = {
-    //     email: user?.email,
-    //     testId: test._id,
-    //     image: test.image,
-    //     title: test.title,
-    //     price: newPrice ? newPrice : test.price,
-    //     date: test.date,
-    //     report: "pending",
-    //   }
-
-    //   axiosSecure.post("/booked", bookedtest)
-    //     .then(res => {
-    //       if (res.data.insertedId) {
-    //         Swal.fire({
-    //           position: "center",
-    //           icon: "success",
-    //           title: "Your work has been saved",
-    //           showConfirmButton: false,
-    //           timer: 1500
-    //         });
-    //       }
-
-    //       axiosPublic.patch(`/test/${id}`, { slots: test.slots - 1 })
-    //         .then((res) => {
-    //           console.log(res.data)
-    //           refetch()
-    //         })
-
-    //     })
-    // }
+    document.getElementById('payemnt_modal').showModal();
 
   }
 
@@ -110,7 +75,7 @@ const TestDetails = () => {
   }
 
   return (
-    <div key={test._id} className="flex flex-col p-6 space-y-6 overflow-hidden rounded-lg card bg-base-100 shadow-2xl my-10">
+    <div key={test._id} className="flex flex-col p-6 space-y-6 overflow-hidden rounded-lg card shadow-2xl my-10 border border-indigo-400 dark:border-indigo-700">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-2 pt-6 items-center">
         <div>
           <img src={test.image} alt="" className="object-cover w-full mb-4 rounded-lg bg-gray-500 dark:bg-gray-500" />
@@ -124,20 +89,22 @@ const TestDetails = () => {
             </div>
             <p className="text-sm text-gray-600 dark:text-gray-400">{test.short_description}</p>
           </div>
-          <div className='flex justify-between mt-6'>
+          <div className='flex justify-around mt-6'>
             <div className='flex items-center gap-2'>
               <span>Slots</span>:
               <FaPlusCircle />
-              <span>{test.slots}</span>
+              <span className='text-blue-800 dark:text-indigo-500'>{test.slots}</span>
             </div>
             <div className='flex items-center gap-2'>
               <FaCalendarDay />:
-              <span>{test.date}</span>
+              <span className='text-blue-800 dark:text-indigo-500'>{test.date}</span>
             </div>
           </div>
-          
 
-          <button onClick={handleAdd} className='btn btn-primary mt-4'>Book Now</button>
+
+          <div className='w-full flex justify-center mt-5'>
+            <button onClick={handleAdd} className='btn btn-primary mt-4 w-1/2'>Book Now</button>
+          </div>
 
 
           <dialog id="payemnt_modal" className="modal">
@@ -148,20 +115,20 @@ const TestDetails = () => {
               <h3 className="font-bold text-xl text-center">PayMent!</h3>
 
               <div className='text-xs mt-5 text-green-500'>
-            use 'HEALTH20' for 20% DISCOUNT
-          </div>
-          <div className='flex w-full mt-5'>
-            <div className='w-full'>
-              <input
-                type="text"
-                placeholder="Promocode"
-                onChange={(e) => setPromocode(e.target.value)}
-                className="input input-bordered rounded-r-none w-full"
-              />
-            </div>
+                use 'HEALTH20' for 20% DISCOUNT
+              </div>
+              <div className='flex w-full mt-5'>
+                <div className='w-full'>
+                  <input
+                    type="text"
+                    placeholder="Promocode"
+                    onChange={(e) => setPromocode(e.target.value)}
+                    className="input input-bordered rounded-r-none w-full"
+                  />
+                </div>
 
-            <button onClick={handleApply} className='btn btn-outline rounded-l-none'>Apply</button>
-          </div>
+                <button onClick={handleApply} className='btn btn-outline rounded-l-none'>Apply</button>
+              </div>
 
               {promocode === 'HEALTH20' || promocode === "health20"
                 ? < div className='mt-5 flex justify-between' >

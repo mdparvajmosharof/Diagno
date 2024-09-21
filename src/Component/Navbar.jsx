@@ -3,8 +3,10 @@ import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
 import { Tooltip } from 'react-tooltip'
 import useAdmin from "../Hooks/useAdmin";
+import { ThemeContext } from "../Provider/ThemeProvider";
 
 const Navbar = () => {
+  const { theme, toggleTheme } = useContext(ThemeContext);
   const { authInfo } = useContext(AuthContext);
   const { logOut, user } = authInfo;
   const [isAdmin] = useAdmin()
@@ -18,48 +20,83 @@ const Navbar = () => {
       .catch((error) => console.log(error));
   };
 
-  const [theme, setTheme] = useState('dark');
-  const toggleTheme = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark');
-  };
 
-  useEffect(() => {
-    document.querySelector('html').setAttribute('data-theme', theme);
-  }, [theme]);
 
   const Navlinks = (
     <>
-      <li>
-        <NavLink to="/">Home</NavLink>
-      </li>
-      <li>
-        <NavLink to="/inquiryForm">Inquiry Form</NavLink>
-      </li>
-      <li>
-        <NavLink to="/healthaware">Health Aware</NavLink>
-      </li>
-      <li>
-        <NavLink to="/services">Services</NavLink>
-      </li>
+
+      <NavLink className={({ isActive }) =>
+        isActive
+          ? "text-md px-4 h-10 flex items-center justify-center rounded-xl bg-indigo-500 text-indigo-200"
+          : "text-md px-4 h-10 flex items-center justify-center rounded-xl border border-indigo-500 text-indigo-500 hover:bg-indigo-900 hover:text-indigo-200"
+      }
+
+
+        to='/'>
+        <li>Home</li>
+      </NavLink>
+      <NavLink className={({ isActive }) =>
+        isActive
+          ? "text-md px-4 h-10 flex items-center justify-center rounded-xl bg-indigo-500 text-indigo-200"
+          : "text-md px-4 h-10 flex items-center justify-center rounded-xl border border-indigo-500 text-indigo-500 hover:bg-indigo-900 hover:text-indigo-200"
+      }
+
+
+        to='/healthaware'>
+        <li>Health Aware</li>
+      </NavLink>
+      <NavLink className={({ isActive }) =>
+        isActive
+          ? "text-md px-4 h-10 flex items-center justify-center rounded-xl bg-indigo-500 text-indigo-200"
+          : "text-md px-4 h-10 flex items-center justify-center rounded-xl border border-indigo-500 text-indigo-500 hover:bg-indigo-900 hover:text-indigo-200"
+      }
+
+
+        to='/inquiryForm'>
+        <li>Inquiry Form</li>
+      </NavLink>
+      <NavLink className={({ isActive }) =>
+        isActive
+          ? "text-md px-4 h-10 flex items-center justify-center rounded-xl bg-indigo-500 text-indigo-200"
+          : "text-md px-4 h-10 flex items-center justify-center rounded-xl border border-indigo-500 text-indigo-500 hover:bg-indigo-900 hover:text-indigo-200"
+      }
+
+
+        to='/services'>
+        <li>Services</li>
+      </NavLink>
 
 
       {
 
         user && !isAdmin && <>
-          <li>
-            <NavLink to="/dashboard/myprofile">Dashboard</NavLink>
-          </li>
+
+          <NavLink className={({ isActive }) =>
+            isActive
+              ? "text-md px-4 h-10 flex items-center justify-center rounded-xl bg-indigo-500 text-indigo-200"
+              : "text-md px-4 h-10 flex items-center justify-center rounded-xl border border-indigo-500 text-indigo-500 hover:bg-indigo-900 hover:text-indigo-200"
+          } to="/dashboard/myprofile">
+            <li>
+              Dashboard
+            </li>
+          </NavLink>
+
+
         </>
       }
       {
-        user && isAdmin && <li><NavLink to="/dashboard/allusers">Dashboard</NavLink></li>
+        user && isAdmin && <li><NavLink className={({ isActive }) =>
+          isActive
+            ? "text-md px-4 h-10 flex items-center justify-center rounded-xl bg-indigo-500 text-indigo-200"
+            : "text-md px-4 h-10 flex items-center justify-center rounded-xl border border-indigo-500 text-indigo-500 hover:bg-indigo-900 hover:text-indigo-200"
+        } to="/dashboard/allusers">Dashboard</NavLink></li>
       }
     </>
   );
 
   return (
     <div>
-      <div className="navbar bg-base-100">
+      <div className="navbar">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -80,19 +117,23 @@ const Navbar = () => {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3  p-2 shadow bg-base-100 rounded-box w-52 z-20"
+              className="menu menu-sm dropdown-content text-indigo-500 mt-3  p-2 shadow rounded-box w-52 z-20"
             >
               {Navlinks}
             </ul>
           </div>
-          <a className="btn btn-ghost text-xl font-bold text-purple-800">
-            <img className="h-6" src="https://i.ibb.co/jLd1X6s/ALterno.png" alt="" />
-            Diagno
-          </a>
+          <Link to={"/"}>
+            <a className="btn btn-ghost text-2xl text-indigo-500">
+              <img className="h-6" src="https://i.ibb.co/jLd1X6s/ALterno.png" alt="" />
+              Diagno
+            </a>
+          </Link>
         </div>
+
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1 gap-2">{Navlinks}</ul>
+          <ul className="menu menu-horizontal text-lg text-indigo-500 gap-2">{Navlinks}</ul>
         </div>
+
         <div className="navbar-end gap-5">
           <div>
             <label className="swap swap-rotate">

@@ -1,5 +1,4 @@
 
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Loading from '../Subpage/Loading';
 import TestCard from '../Subpage/TestCard';
@@ -16,6 +15,7 @@ const AllTests = () => {
   const [searchDate, setSearchDate] = useState('');
   const [tests, setTests] = useState([]);
   const [loading, setLoading] = useState(true)
+
 
   useEffect(() => {
     axiosPublic.get("tests")

@@ -42,6 +42,15 @@ const UpApointments = () => {
 
     }
 
+    if(booked.length == 0){
+        return (
+            <div className='flex justify-center mt-10'>
+                <div> You didn't book any Test. </div>
+               
+            </div>
+        )
+    }
+
     return (
         <div>
             <div className="overflow-x-auto">
@@ -64,8 +73,8 @@ const UpApointments = () => {
                                     <th>{idx + 1}</th>
                                     <td>{item.title}</td>
                                     <td>{item.date}</td>
-                                    <td>{item.report}</td>
-                                    <td onClick={() => handleCancel(item._id)}><MdDeleteForever /></td>
+                                    <td className='text-blue-800 dark:text-indigo-500'>{item.report}</td>
+                                    <td className='btn btn-primary btn-outline' onClick={() => handleCancel(item._id)}><MdDeleteForever /></td>
                                 </tr>
                             </>)
                         }

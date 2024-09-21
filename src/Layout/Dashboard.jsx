@@ -6,6 +6,7 @@ import Loading from '../Subpage/Loading';
 import { useUser } from '../Hooks/useUser';
 import { useAxiosSecure } from '../Hooks/useAxiosSecure';
 import Footer from '../Component/Footer';
+import { MdOutlineArrowCircleRight } from 'react-icons/md';
 
 const Dashboard = () => {
 
@@ -58,20 +59,20 @@ const Dashboard = () => {
     }
 
     return (
-        <div className="max-w-6xl mx-auto mt-10">
+        <div className="max-w-6xl mx-auto">
             <Navbar></Navbar>
             <div className='flex my-10 '>
                 <div className="drawer md:drawer-open w-1/4 ">
                     <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
                     <div className="drawer-content flex flex-col items-center justify-center">
                         {/* Page content here */}
-                        <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button md:hidden">
-                            Open drawer
+                        <label htmlFor="my-drawer-2" className="btn ml-5 px-0 text-2xl btn-primary z-50 drawer-button md:hidden">
+                        <MdOutlineArrowCircleRight />
                         </label>
                     </div>
-                    <div className="drawer-side ">
+                    <div className="drawer-side z-50 fixed">
                         <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
-                        <ul className="menu bg-base-200 text-base-content min-h-full w-56 p-4 space-y-5">
+                        <ul className="menu bg-base-200 rounded-lg border border-indigo-400 dark:border-indigo-700 text-base-content min-h-full w-56 p-4 space-y-5">
                             {/* Sidebar content here */}
                             {
                                 NavLinks

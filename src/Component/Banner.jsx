@@ -40,33 +40,33 @@ const Banner = () => {
         pagination={{ clickable: true }}
         scrollbar={{ draggable: true }}
         modules={[Pagination, Scrollbar, Navigation]}
-        className="mySwiper border  rounded-xl my-10"
+        className="mySwiper border border-cyan-500 rounded-2xl my-10"
       >
         {
           activeBanners.map(banner=>
             <SwiperSlide key={banner._id} className="">
-          <div className="card w-full bg-base-100 shadow-xl image-full">
+          <div className="card bg-base-100 shadow-xl h-[500px] image-full">
             <figure>
               <img
                 src={banner.image}
                 alt="Shoes"
-                className="h-2"
+                className="w-full"
               />
             </figure>
-            <div className="card-body flex justify-center items-center ">
+            <div className="card-body flex justify-center items-center  md:mx-20">
               <div className="flex justify-center flex-col items-center gap-16">
-                <h2 className="card-title text-5xl font-extrabold text-white ">
+                <h2 className="card-title text-center text-5xl font-bold md:font-extrabold text-white ">
                 {banner.title}
                 </h2>
-                <p className="text-white font-bold text-2xl">{banner.text}</p>
+                <p className="text-white font-semibold text-2xl text-center">{banner.text}</p>
                 
               </div>
-              <div className="flex items-center text-2xl w-full justify-around mt-10 mx-5">
-                <div className="flex items-center gap-2">
+              <div className="md:flex items-center text-2xl w-full md:justify-around mt-10">
+                <div className="flex justify-center items-center gap-2">
                  <span>Coupon :</span> <RiCoupon3Fill />
                   {banner.coupon_code}
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center justify-center gap-2">
                   <span>Discount :</span>
                   <CiDiscount1 />
                   {banner.discount_rate}

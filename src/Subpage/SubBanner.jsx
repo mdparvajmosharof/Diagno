@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 const SubBanner = () => {
   return (
-    <div className="p-6 py-12 bg-emerald-600 text-gray-50 my-10 rounded-xl ">
+    <div className="p-6 py-12 bg-indigo-500 dark:bg-indigo-950 text-gray-50 my-10 rounded-xl ">
     <div className="container mx-auto">
         <div className="flex flex-col lg:flex-row items-center justify-between">
             <h2 className="text-center text-6xl tracking-tighter font-bold">
