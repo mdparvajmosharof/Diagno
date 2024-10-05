@@ -13,7 +13,7 @@ const AddTest = () => {
   const axiosSecure = useAxiosSecure();
 
   const onSubmit = async (data) => {
-    console.log(data)
+    // console.log(data)
     const imgFile = { image: data.imgFile[0] }
     const res = await axiosPublic.post(img_hosting_api, imgFile, {
       headers: {
@@ -30,7 +30,7 @@ const AddTest = () => {
         short_description: data.short_description
       }
       const testRes = await axiosSecure.post('/tests', testsData);
-      console.log(testRes.data)
+      // console.log(testRes.data)
       if (testRes.data.insertedId) {
         // show success popup
         reset();

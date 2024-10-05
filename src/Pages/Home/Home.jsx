@@ -5,29 +5,58 @@ import SubBanner from "../../Subpage/SubBanner";
 import Featured from "./Featured";
 import Promotional from "../Promotional";
 import Recommendation from "./Recommendation";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import Swal from "sweetalert2";
+import CountUp, { useCountUp } from 'react-countup';
 
 const Home = () => {
- 
+
   useEffect(() => {
     document.title = "Diagno";
+    AOS.init();
   }, []);
 
+  const handleMsg = () =>{
+    Swal.fire({
+      icon: "success",
+      title: "Message sent Successful!",
+      showConfirmButton: false,
+      timer: 1500,
+    });
+  }
+
+  useCountUp({
+    ref: 'counter',
+    end: 1234567,
+    enableScrollSpy: true,
+    scrollSpyDelay: 3000,
+    duration: 7
+  });
 
   return (
     <div>
-      <Banner></Banner>
-      <SubBanner></SubBanner>
+      <div data-aos="fade-up">
+        <Banner></Banner>
+      </div>
+      <div data-aos="fade-down" data-aos-easing="linear" data-aos-duration ="1500">
+        <SubBanner></SubBanner>
+      </div>
 
       <div className="text-3xl text-center mt-5 shadow-xl font-bold">
         Featured Tests
       </div>
 
       <Featured></Featured>
+
+      <div data-aos="flip-left" data-aos-duration ="1500">
       <Promotional></Promotional>
+      </div>
+
       <Recommendation></Recommendation>
 
 
-      <div className="my-20 card shadow-xl rounded-xl">
+      <div data-aos="fade-left" data-aos-easing="ease-in-sine" data-aos-duration ="1500" className="my-20 card shadow-xl rounded-xl">
         <section className="py-6   rounded-xl">
           <div className="grid max-w-6xl grid-cols-1 px-6 mx-auto lg:px-8 md:grid-cols-2 md:divide-x">
             <div className="py-6 md:py-0 md:px-6">
@@ -85,7 +114,7 @@ const Home = () => {
                 <input
                   type="text"
                   placeholder="Leroy Jenkins"
-                  className="block w-full border p-4 rounded-md shadow-sm focus:ring focus:ring-opacity-75 "
+                  className="w-full p-4 rounded-md input mt-2 border dark:border-blue-700 shadow-lg dark:shadow-blue-950"
                 />
               </label>
               <label className="block">
@@ -93,19 +122,21 @@ const Home = () => {
                 <input
                   type="email"
                   placeholder="leroy@jenkins.com"
-                  className="block w-full border p-4 rounded-md shadow-sm focus:ring focus:ring-opacity-75 "
+                  className="w-full p-4 rounded-md input mt-2 border dark:border-blue-700 shadow-lg dark:shadow-blue-950"
                 />
               </label>
               <label className="block">
                 <span className="mb-1">Message</span>
                 <textarea
                   rows="3"
-                  className="block w-full border p-4 rounded-md focus:ring focus:ring-opacity-75 "
+                  placeholder="Your Message"
+                  className="textarea w-full border p-4 rounded-md mt-2 dark:border-blue-700 shadow-lg dark:shadow-blue-950"
                 ></textarea>
               </label>
               <button
                 type="button"
-                className="self-center  px-8 py-3 text-lg rounded focus:ring hover:ring focus:ring-opacity-75 "
+                className="btn btn-link"
+                onClick={handleMsg}
               >
                 Submit
               </button>
@@ -117,8 +148,8 @@ const Home = () => {
       <div>
         <section className="p-6 my-6 card shadow-xl">
           <div className="container grid grid-cols-1 gap-6 mx-auto sm:grid-cols-2 xl:grid-cols-4">
-            <div className="flex p-4 space-x-4 rounded-lg md:space-x-6 bg-gray-900  text-gray-100 ">
-              <div className="flex justify-center p-2 align-middle rounded-lg sm:p-4 bg-violet-400 ">
+            <div className="flex p-4 space-x-4 rounded-lg md:space-x-6 shadow-xl ">
+              <div className="flex justify-center p-2 align-middle rounded-lg sm:p-4 bg-indigo-500 ">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 512 512"
@@ -131,12 +162,14 @@ const Home = () => {
                 </svg>
               </div>
               <div className="flex flex-col justify-center align-middle">
-                <p className="text-3xl font-semibold leading-none">200</p>
+                <p className="text-3xl font-semibold leading-none">
+                <CountUp end={200} enableScrollSpy/>
+                  </p>
                 <p className="capitalize">Orders</p>
               </div>
             </div>
-            <div className="flex p-4 space-x-4 rounded-lg md:space-x-6 bg-gray-900  text-gray-100 ">
-              <div className="flex justify-center p-2 align-middle rounded-lg sm:p-4 bg-violet-400 ">
+            <div className="flex p-4 space-x-4 rounded-lg md:space-x-6 shadow-xl ">
+              <div className="flex justify-center p-2 align-middle rounded-lg sm:p-4 bg-indigo-500 ">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 512 512"
@@ -150,12 +183,12 @@ const Home = () => {
                 </svg>
               </div>
               <div className="flex flex-col justify-center align-middle">
-                <p className="text-3xl font-semibold leading-none">7500</p>
+                <p className="text-3xl font-semibold leading-none"><CountUp end={7500} enableScrollSpy/></p>
                 <p className="capitalize">New customers</p>
               </div>
             </div>
-            <div className="flex p-4 space-x-4 rounded-lg md:space-x-6 bg-gray-900  text-gray-100 ">
-              <div className="flex justify-center p-2 align-middle rounded-lg sm:p-4 bg-violet-400 ">
+            <div className="flex p-4 space-x-4 rounded-lg md:space-x-6 shadow-xl">
+              <div className="flex justify-center p-2 align-middle rounded-lg sm:p-4 bg-indigo-500 ">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 512 512"
@@ -171,12 +204,12 @@ const Home = () => {
                 </svg>
               </div>
               <div className="flex flex-col justify-center align-middle">
-                <p className="text-3xl font-semibold leading-none">172%</p>
+                <p className="text-3xl font-semibold leading-none"><CountUp end={87} enableScrollSpy/>%</p>
                 <p className="capitalize">Growth</p>
               </div>
             </div>
-            <div className="flex p-4 space-x-4 rounded-lg md:space-x-6 bg-gray-900  text-gray-100 ">
-              <div className="flex justify-center p-2 align-middle rounded-lg sm:p-4 bg-violet-400 ">
+            <div className="flex p-4 space-x-4 rounded-lg md:space-x-6 shadow-xl ">
+              <div className="flex justify-center p-2 align-middle rounded-lg sm:p-4 bg-indigo-500 ">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 512 512"
@@ -187,7 +220,7 @@ const Home = () => {
                 </svg>
               </div>
               <div className="flex flex-col justify-center align-middle">
-                <p className="text-3xl font-semibold leading-none">17%</p>
+                <p className="text-3xl font-semibold leading-none"><CountUp end={24} enableScrollSpy/>%</p>
                 <p className="capitalize">Bounce rate</p>
               </div>
             </div>
@@ -214,7 +247,7 @@ const Home = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                     fill="currentColor"
-                    className="w-6 h-6 text-yellow-500 "
+                    className="w-6 h-6 text-indigo-700 "
                   >
                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
                   </svg>
@@ -228,7 +261,7 @@ const Home = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                     fill="currentColor"
-                    className="w-6 h-6 text-yellow-500 "
+                    className="w-6 h-6 text-indigo-700 "
                   >
                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
                   </svg>
@@ -242,7 +275,7 @@ const Home = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                     fill="currentColor"
-                    className="w-6 h-6 text-yellow-500 "
+                    className="w-6 h-6 text-indigo-700 "
                   >
                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
                   </svg>
@@ -256,7 +289,7 @@ const Home = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                     fill="currentColor"
-                    className="w-6 h-6 text-gray-600 "
+                    className="w-6 h-6"
                   >
                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
                   </svg>
@@ -270,59 +303,59 @@ const Home = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                     fill="currentColor"
-                    className="w-6 h-6 text-gray-600 "
+                    className="w-6 h-6"
                   >
                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
                   </svg>
                 </button>
               </div>
-              <span className="text-gray-400 ">3 out of 5</span>
+              <span className=" ">3 out of 5</span>
             </div>
-            <p className="text-sm text-gray-400 ">861 global ratings</p>
+            <p className="text-sm "><CountUp end={861} enableScrollSpy/> global ratings</p>
             <div className="flex flex-col mt-4">
               <div className="flex items-center space-x-1">
                 <span className="flex-shrink-0 w-12 text-sm">5 star</span>
-                <div className="flex-1 h-4 overflow-hidden rounded-sm bg-gray-700 ">
-                  <div className="bg-orange-700  h-4 w-5/6"></div>
+                <div className="flex-1 h-4 overflow-hidden rounded-md bg-indigo-300 ">
+                  <div data-aos="fade-right" data-aos-duration ="1500" data-aos-delay="300" className="bg-indigo-700  h-4 w-5/6"></div>
                 </div>
                 <span className="flex-shrink-0 w-12 text-sm text-right">
-                  83%
+                <CountUp end={83} enableScrollSpy/>%
                 </span>
               </div>
               <div className="flex items-center space-x-1">
                 <span className="flex-shrink-0 w-12 text-sm">4 star</span>
-                <div className="flex-1 h-4 overflow-hidden rounded-sm bg-gray-700 ">
-                  <div className="bg-orange-700  h-4 w-4/6"></div>
+                <div className="flex-1 h-4 overflow-hidden rounded-md bg-indigo-300 ">
+                  <div data-aos="fade-right" data-aos-duration ="1500" data-aos-delay="300" className="bg-indigo-700  h-4 w-4/6"></div>
                 </div>
                 <span className="flex-shrink-0 w-12 text-sm text-right">
-                  67%
+                <CountUp end={67} enableScrollSpy/>%
                 </span>
               </div>
               <div className="flex items-center space-x-1">
                 <span className="flex-shrink-0 w-12 text-sm">3 star</span>
-                <div className="flex-1 h-4 overflow-hidden rounded-sm bg-gray-700 ">
-                  <div className="bg-orange-700  h-4 w-3/6"></div>
+                <div className="flex-1 h-4 overflow-hidden rounded-md bg-indigo-300 ">
+                  <div data-aos="fade-right" data-aos-duration ="1500" data-aos-delay="300" className="bg-indigo-700  h-4 w-3/6"></div>
                 </div>
                 <span className="flex-shrink-0 w-12 text-sm text-right">
-                  50%
+                <CountUp end={50} enableScrollSpy/>%
                 </span>
               </div>
               <div className="flex items-center space-x-1">
                 <span className="flex-shrink-0 w-12 text-sm">2 star</span>
-                <div className="flex-1 h-4 overflow-hidden rounded-sm bg-gray-700 ">
-                  <div className="bg-orange-700  h-4 w-2/6"></div>
+                <div className="flex-1 h-4 overflow-hidden rounded-md bg-indigo-300">
+                  <div data-aos="fade-right" data-aos-duration ="1500" data-aos-delay="300" className="bg-indigo-700  h-4 w-2/6"></div>
                 </div>
                 <span className="flex-shrink-0 w-12 text-sm text-right">
-                  33%
+                <CountUp end={33} enableScrollSpy/>%
                 </span>
               </div>
               <div className="flex items-center space-x-1">
                 <span className="flex-shrink-0 w-12 text-sm">1 star</span>
-                <div className="flex-1 h-4 overflow-hidden rounded-sm bg-gray-700 ">
-                  <div className="bg-orange-700  h-4 w-1/6"></div>
+                <div className="flex-1 h-4 overflow-hidden rounded-md bg-indigo-300">
+                  <div data-aos="fade-right" data-aos-duration ="1500" data-aos-delay="300" className="bg-indigo-700  h-4 w-1/6"></div>
                 </div>
                 <span className="flex-shrink-0 w-12 text-sm text-right">
-                  17%
+                <CountUp end={17} enableScrollSpy/>%
                 </span>
               </div>
             </div>

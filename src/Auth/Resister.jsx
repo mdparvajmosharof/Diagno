@@ -103,10 +103,10 @@ const Resister = () => {
       return;
     }
 
-    console.log(name, email, photo_url, password, blood, districtName, upazila);
+    // console.log(name, email, photo_url, password, blood, districtName, upazila);
     createUser(email, password)
       .then((res) => {
-        console.log(res)
+        // console.log(res)
         updateUserProfile(name, photo_url)
         .then(() => {
           const userInfo = {name, email, photo_url, blood, districtName, upazila, isActive}

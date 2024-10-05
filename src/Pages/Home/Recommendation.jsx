@@ -37,7 +37,7 @@ const Recommendation = () => {
       >
         {
           rec.map(r => <SwiperSlide key={r.id}>
-            <div className='card text-center py-20 shadow-xl space-y-4'>
+            <div className='card text-center py-20 space-y-4 mx-10'>
               <div className='font-extrabold text-purple-500'>{r.type}</div>
               <div>
                 <div className='text-emerald-400 mb-2'>{r.title}</div>

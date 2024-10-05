@@ -5,7 +5,16 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors:{
+        prothom : '#7BC6CC' ,
+        doi : '#BE93C5',
+      },
+      gradientColorStops:{
+        prothom : '#7BC6CC' ,
+        doi : '#BE93C5',
+      }
+    },
   },
   darkMode: 'class',
   plugins: [require("daisyui")],

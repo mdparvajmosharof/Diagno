@@ -27,9 +27,9 @@ const AddBanner = () => {
         isActive: JSON.parse(data.isActive),
         text: data.text
       }
-      console.log(bannerData)
+      // console.log(bannerData)
       const bannerRes = await axiosSecure.post('/banner', bannerData);
-      console.log(bannerRes.data)
+      // console.log(bannerRes.data)
       if (bannerRes.data.insertedId) {
         // show success popup
         reset();

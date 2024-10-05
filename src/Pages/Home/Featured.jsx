@@ -11,7 +11,7 @@ const Featured = () => {
     useEffect(() => {
         axiosPublic.get("/featured")
             .then(res => {
-                console.log(res.data)
+                // console.log(res.data)
                 setFeaturedTests(res.data)
             })
     }, [axiosPublic]);
@@ -24,7 +24,7 @@ const Featured = () => {
         <div className='flex justify-center'>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 my-10">
                 {
-                    featuredTests.map(tests => <TestCard key={tests._id} test={tests.testDetails}></TestCard>)
+                    featuredTests.map((tests,index) => <TestCard key={tests._id} test={tests.testDetails} index={index}></TestCard>)
                 }
             </div>
         </div>

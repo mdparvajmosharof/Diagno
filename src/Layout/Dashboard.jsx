@@ -19,7 +19,7 @@ const Dashboard = () => {
     const axiosSecure = useAxiosSecure()
 
     useEffect(() => {
-        console.log(authUser)
+        // console.log(authUser)
         if (authUser?.email) {
             axiosSecure.get(`/users/${authUser?.email}`)
                 .then((res) => {
@@ -48,7 +48,7 @@ const Dashboard = () => {
         return <Loading></Loading>
     }
 
-    console.log(TheUser.isActive)
+    // console.log(TheUser.isActive)
 
     if (TheUser.isActive === "blocked") {
 
@@ -62,12 +62,12 @@ const Dashboard = () => {
         <div className="max-w-6xl mx-auto">
             <Navbar></Navbar>
             <div className='flex my-10 '>
-                <div className="drawer md:drawer-open w-1/4 ">
+                <div className="drawer w-0 md:drawer-open md:w-1/4 ">
                     <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-                    <div className="drawer-content flex flex-col items-center justify-center">
+                    <div className="drawer-content h-5 flex flex-col items-center justify-center w-5">
                         {/* Page content here */}
-                        <label htmlFor="my-drawer-2" className="btn ml-5 px-0 text-2xl btn-primary z-50 drawer-button md:hidden">
-                        <MdOutlineArrowCircleRight />
+                        <label htmlFor="my-drawer-2" className="btn px-0 text-2xl btn-primary z-50 drawer-button md:hidden">
+                            <MdOutlineArrowCircleRight />
                         </label>
                     </div>
                     <div className="drawer-side z-50 fixed">
@@ -84,7 +84,7 @@ const Dashboard = () => {
                     <Outlet></Outlet>
                 </div>
             </div>
-            <Footer></Footer>
+                    <Footer></Footer>
         </div>
     )
 }

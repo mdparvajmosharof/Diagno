@@ -12,7 +12,7 @@ const StatisticsPage = () => {
   useEffect(() => {
     const fetchBookedServices = async () => {
       const res = await axiosSecure.get('/featured');
-      console.log(res.data)
+      // console.log(res.data)
       if (res.data && Array.isArray(res.data)) {
         const formattedData = res.data.map(item => ({
           name: item.testDetails.title,

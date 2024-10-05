@@ -24,7 +24,7 @@ const AllUsers = () => {
     const handleActive = (userId) => {
         axiosSecure.patch(`/users/active/${userId}`)
             .then(res => {
-                console.log(res.data)
+                // console.log(res.data)
                 refetch()
                 if (res.data.modifiedCount) {
                     Swal.fire({

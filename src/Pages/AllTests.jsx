@@ -44,11 +44,9 @@ const AllTests = () => {
     groupedTests.push(tests.slice(i, i + 9));
   }
 
-  console.log(groupedTests)
+  // console.log(groupedTests)
 
-  groupedTests.map(group=>{
-    console.log(group)
-  })
+  
 
 
   if (loading) {
@@ -75,7 +73,7 @@ const AllTests = () => {
           {groupedTests.map((group, index) => (
             <SwiperSlide className='pb-3' key={index}>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 my-10">
-                {group.map(test => <TestCard key={test._id} test={test}></TestCard>)}
+                {group.map((test, index) => <TestCard key={test._id} test={test} index={index}></TestCard>)}
               </div>
             </SwiperSlide>
           ))}

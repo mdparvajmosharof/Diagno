@@ -10,7 +10,7 @@ const UpApointments = () => {
     const [booked, refetch] = useBooked();
     const axiosSecure = useAxiosSecure();
 
-    console.log(booked)
+    // console.log(booked)
 
     const handleCancel = (id) => {
 

@@ -16,13 +16,13 @@ const CheckoutForm = ({ price, test, refetch }) => {
     const axiosSecure = useAxiosSecure();
     const [user] = useUser();
     const navigate = useNavigate();
-    console.log(price)
+    // console.log(price)
 
     useEffect(() => {
         if (price > 0) {
             axiosSecure.post('/create-payment-intent', { price: price })
                 .then(res => {
-                    console.log(res.data.clientSecret);
+                    // console.log(res.data.clientSecret);
                     setClientSecret(res.data.clientSecret);
                 })
         }
@@ -48,10 +48,10 @@ const CheckoutForm = ({ price, test, refetch }) => {
         });
 
         if (error) {
-            console.log(error)
+            // console.log(error)
             setError(error.message)
         } else {
-            console.log(paymentMethod)
+            // console.log(paymentMethod)
             setError('')
         }
 
@@ -66,12 +66,12 @@ const CheckoutForm = ({ price, test, refetch }) => {
         })
 
         if (confirmError) {
-            console.log('confirm error')
+            // console.log('confirm error')
         }
         else {
-            console.log('payment intent', paymentIntent)
+            // console.log('payment intent', paymentIntent)
             if (paymentIntent.status === 'succeeded') {
-                console.log('transaction id', paymentIntent.id);
+                // console.log('transaction id', paymentIntent.id);
                 setTransactionId(paymentIntent.id);
 
                 const bookedtest = {
@@ -89,12 +89,12 @@ const CheckoutForm = ({ price, test, refetch }) => {
 
                 const res = await axiosSecure.post("/booked", bookedtest)
 
-                console.log(res.data)
+                // console.log(res.data)
 
 
                 axiosSecure.patch(`/test/${test._id}`, { slots: test.slots - 1 })
                     .then((res) => {
-                        console.log(res.data)
+                        // console.log(res.data)
 
                         refetch()
 

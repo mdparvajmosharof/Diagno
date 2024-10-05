@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
 import { ToastContainer } from "react-toastify";
@@ -13,16 +13,17 @@ const Login = () => {
 
   const { authInfo } = useContext(AuthContext);
   const { name, LogInUser, googleLogIn, githubLogIn, user } = authInfo;
+  const [isPopUp, setIsPopUp] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const axiosPublic = useAxiosPublic();
-  console.log(location)
+  // console.log(location)
 
   const handleLogIn = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
-    console.log(password, email);
+    // console.log(password, email);
     LogInUser(email, password)
       .then(() => {
         Swal.fire({
@@ -45,40 +46,52 @@ const Login = () => {
       });
   };
 
-  const handleGoogleLogIn = () => {
+  const handleGoogleLogIn = async() => { 
+    if(isPopUp) return;
+
+    setIsPopUp(true);
+
     googleLogIn()
-    .then((res) => {
-      const userInfo={
-          email: res.user?.email,
-          name : res.user?.displayName,
-          photo_url: res.user?.photoURL,
-          isActive: "Active"
-      }
-      console.log(res)
-      console.log(userInfo)
-      axiosPublic.post("/users", userInfo)
-      .then(res=>{
-        console.log(res)
+      .then((res) => {
+        const userInfo={
+            email: res.user?.email,
+            name : res.user?.displayName,
+            photo_url: res.user?.photoURL,
+            isActive: "Active"
+        }
+        // console.log(res)
+        // console.log(userInfo)
+        axiosPublic.post("/users", userInfo)
+        .then(res=>{
+          // console.log(res)
+        })
+        Swal.fire({
+          icon: "success",
+          title: "Log In Successful!",
+          showConfirmButton: false,
+          timer: 1500,
+        })
+        navigate(location?.state || "/" ,{replace: true});
       })
-      Swal.fire({
-        icon: "success",
-        title: "Log In Successful!",
-        showConfirmButton: false,
-        timer: 1500,
-      })
-      navigate(location?.state ? location.state : "/");
-    })
-    .catch(() => {
+   
+    .catch((err) => {
+      // console.log(err)
       Swal.fire({
         icon: "error",
         title: "Log In Error!",
         showConfirmButton: false,
         timer: 1500,
       });
-    });
+    })
+
+    .finally(()=>{
+      setIsPopUp(false);
+    })
+
   };
 
   const handleGithubLogIn = () => {
+  
     githubLogIn().then(() => {
       Swal.fire({
         icon: "success",
@@ -187,9 +200,9 @@ const Login = () => {
             to="/resister"
             rel="noopener noreferrer"
             href="#"
-            className=" text-blue-800 font"
+            className=" text-blue-800 font ml-2 "
           >
-            Resister
+          Register
           </Link>
         </p>
       </div>

@@ -8,7 +8,7 @@ const PrivateRoutes = ({children}) => {
     const {authInfo} = useContext(AuthContext);
     const {user, loading} = authInfo
     const location = useLocation();
-    console.log(location);
+    // console.log(location);
 
     if(loading){
         return <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-black dark:border-violet-600 mx-auto mt-40"></div>

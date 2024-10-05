@@ -33,7 +33,7 @@ const MyProfile = () => {
     }
   }, [selectedDistrict, upazilas])
 
-  console.log(authUser?.email)
+  // console.log(authUser?.email)
 
 
   const axiosSecure = useAxiosSecure();
@@ -73,7 +73,7 @@ const MyProfile = () => {
   
   }
 
-  console.log(user)
+  // console.log(user)
 
   if (loading) {
     return <Loading></Loading>

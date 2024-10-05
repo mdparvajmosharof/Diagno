@@ -12,7 +12,7 @@ const Navbar = () => {
   const [isAdmin] = useAdmin()
 
   const handleSignOut = () => {
-    console.log("log out click");
+    // console.log("log out click");
     logOut()
       .then(() => {
         console.log("logged out");
@@ -39,6 +39,16 @@ const Navbar = () => {
         isActive
           ? "text-md px-4 h-10 flex items-center justify-center rounded-xl bg-indigo-500 text-indigo-200"
           : "text-md px-4 h-10 flex items-center justify-center rounded-xl border border-indigo-500 text-indigo-500 hover:bg-indigo-900 hover:text-indigo-200"
+      }
+
+
+        to='/alltests'>
+        <li>All Tests</li>
+      </NavLink>
+      <NavLink className={({ isActive }) =>
+        isActive
+          ? "text-md px-4 h-10 flex items-center justify-center rounded-xl bg-indigo-700 text-indigo-200"
+          : "text-md px-4 h-10 flex items-center transition-all justify-center rounded-xl border border-indigo-500 text-indigo-500 hover:bg-indigo-900 hover:text-indigo-200"
       }
 
 
@@ -117,14 +127,14 @@ const Navbar = () => {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content text-indigo-500 mt-3  p-2 shadow rounded-box w-52 z-20"
+              className="menu menu-sm bg-base-300 gap-2 dropdown-content text-indigo-500 mt-3  p-2 shadow rounded-box w-52 z-20"
             >
               {Navlinks}
             </ul>
           </div>
           <Link to={"/"}>
-            <a className="btn btn-ghost text-2xl text-indigo-500">
-              <img className="h-6" src="https://i.ibb.co/jLd1X6s/ALterno.png" alt="" />
+            <a className="flex items-center gap-3 font-bold text-3xl text-indigo-500">
+              <img className="h-16 rounded-full" src="https://i.ibb.co.com/K726hs3/afb9f4cd-8613-4f36-adf5-4c3c5493030f.jpg" alt="" />
               Diagno
             </a>
           </Link>

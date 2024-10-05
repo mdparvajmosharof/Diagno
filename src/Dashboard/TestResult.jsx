@@ -8,10 +8,10 @@ const TestResult = () => {
 
     const [booked] = useBooked();
     const axiosPublic = useAxiosPublic();
-    console.log(booked)
+    // console.log(booked)
 
     const DeliveredTests = booked.filter(tests => tests.report == "delivered");
-    console.log(DeliveredTests)
+    // console.log(DeliveredTests)
 
     const handleDownload = async (tstId) => {
 
@@ -37,16 +37,11 @@ const TestResult = () => {
 
     }
 
-    if(!DeliveredTests){
-        return (
-            <div className='m-0 mx-auto'>NONE OF YOUR TEST RESULT DELIVERED YET!</div>
-        )
-    }
 
     if(DeliveredTests.length == 0){
         return (
             <div className='flex justify-center mt-10'>
-                <div> You didn't book any Test. </div>
+                <div>NONE OF YOUR TEST RESULT DELIVERED YET!</div>
                
             </div>
         )

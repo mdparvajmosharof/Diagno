@@ -1,11 +1,22 @@
 import { useEffect } from "react";
 import Footer from "../Component/Footer";
 import Navbar from "../Component/Navbar";
+import Swal from "sweetalert2";
 
 const InquiryForm = () => {
   useEffect(() => {
     document.title = "Diagno | Inquiry";
   }, []);
+
+  const handleInquery = () =>{
+    Swal.fire({
+      icon: "success",
+      title: "Message sent Successful!",
+      showConfirmButton: false,
+      timer: 1500,
+    });
+  }
+
   return (
     <div>
 
@@ -29,7 +40,7 @@ const InquiryForm = () => {
                 id="firstname"
                 type="text"
                 placeholder="First name"
-                className="w-full p-4 rounded-md focus:ring focus:ring-opacity-75 text-gray-900 focus:ring-emerald-600 border-gray-300"
+                className="w-full p-4 rounded-md input mt-2 border dark:border-blue-700 shadow-lg dark:shadow-blue-950"
               />
             </div>
             <div className="col-span-full sm:col-span-3">
@@ -40,7 +51,7 @@ const InquiryForm = () => {
                 id="lastname"
                 type="text"
                 placeholder="Last name"
-                className="w-full p-4 rounded-md focus:ring focus:ring-opacity-75 text-gray-900 focus:ring-emerald-600 border-gray-300"
+                className="w-full p-4 rounded-md input mt-2 border dark:border-blue-700 shadow-lg dark:shadow-blue-950"
               />
             </div>
             <div className="col-span-full sm:col-span-3">
@@ -51,7 +62,7 @@ const InquiryForm = () => {
                 id="email"
                 type="email"
                 placeholder="Email"
-                className="w-full p-4 rounded-md focus:ring focus:ring-opacity-75 text-gray-900 focus:ring-emerald-600 border-gray-300"
+                className="w-full p-4 rounded-md input mt-2 border dark:border-blue-700 shadow-lg dark:shadow-blue-950"
               />
             </div>
             <div className="col-span-full">
@@ -62,7 +73,7 @@ const InquiryForm = () => {
                 id="address"
                 type="text"
                 placeholder=""
-                className="w-full p-4 rounded-md focus:ring focus:ring-opacity-75 text-gray-900 focus:ring-emerald-600 border-gray-300"
+                className="w-full p-4 rounded-md input mt-2 border dark:border-blue-700 shadow-lg dark:shadow-blue-950"
               />
             </div>
             <div className="col-span-full sm:col-span-2">
@@ -73,7 +84,7 @@ const InquiryForm = () => {
                 id="city"
                 type="text"
                 placeholder=""
-                className="w-full p-4 rounded-md focus:ring focus:ring-opacity-75 text-gray-900 focus:ring-emerald-600 border-gray-300"
+                className="w-full p-4 rounded-md input mt-2 border dark:border-blue-700 shadow-lg dark:shadow-blue-950"
               />
             </div>
             <div className="col-span-full sm:col-span-2">
@@ -84,7 +95,7 @@ const InquiryForm = () => {
                 id="state"
                 type="text"
                 placeholder=""
-                className="w-full p-4 rounded-md focus:ring focus:ring-opacity-75 text-gray-900 focus:ring-emerald-600 border-gray-300"
+                className="w-full p-4 rounded-md input mt-2 border dark:border-blue-700 shadow-lg dark:shadow-blue-950"
               />
             </div>
             <div className="col-span-full sm:col-span-2">
@@ -95,21 +106,22 @@ const InquiryForm = () => {
                 id="zip"
                 type="text"
                 placeholder=""
-                className="w-full p-4 rounded-md focus:ring focus:ring-opacity-75 text-gray-900 focus:ring-emerald-600 border-gray-300"
+                className="w-full p-4 rounded-md input mt-2 border dark:border-blue-700 shadow-lg dark:shadow-blue-950"
               />
             </div>
             <div className="col-span-full">
               <h1>Message</h1>
               <textarea
                 placeholder="Bio"
-                className="textarea textarea-bordered textarea-lg w-full "
+                className="textarea textarea-bordered textarea-lg w-full mt-2 border dark:border-blue-700 shadow-lg dark:shadow-blue-950"
               ></textarea>
             </div>
-            <div className="col-span-full flex justify-center">
+            <div className="col-span-full flex justify-center mt-5">
               <input
-                className="btn btn-primary mx-auto"
+                className="w-1/3 btn btn-outline btn-primary mx-auto"
                 type="button"
                 value="Send Message"
+                onClick={handleInquery}
               />
             </div>
           </div>

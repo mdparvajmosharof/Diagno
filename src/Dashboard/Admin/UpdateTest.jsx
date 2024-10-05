@@ -27,7 +27,7 @@ const UpdateTest = () => {
     // console.log(test)
 
     const onSubmit = async (data) => {
-        console.log(data)
+        // console.log(data)
         const imgFile = { image: data.imgFile[0] }
         const res = await axiosPublic.post(img_hosting_api, imgFile, {
             headers: {
@@ -43,9 +43,9 @@ const UpdateTest = () => {
                 date: data.date,
                 short_description: data.short_description
             }
-            console.log(testsData)
+            // console.log(testsData)
             const testRes = await axiosSecure.patch(`/test/${id}`, testsData);
-            console.log(testRes.data)
+            // console.log(testRes.data)
             if (testRes.data.modifiedCount) {
                 // show success popup
                 reset();

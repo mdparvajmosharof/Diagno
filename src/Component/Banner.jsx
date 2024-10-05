@@ -24,10 +24,10 @@ const Banner = () => {
     })
   },[])
 
-  console.log(banner)
+  // console.log(banner)
 
   const activeBanners = banner?.filter(banner => banner.isActive);
-  console.log(activeBanners)
+  // console.log(activeBanners)
 
   if(loading){
     return <Loading></Loading>
@@ -53,7 +53,7 @@ const Banner = () => {
                 className="w-full"
               />
             </figure>
-            <div className="card-body flex justify-center items-center  md:mx-20">
+            <div className="card-body flex justify-center items-center  md:mx-20 ">
               <div className="flex justify-center flex-col items-center gap-16">
                 <h2 className="card-title text-center text-5xl font-bold md:font-extrabold text-white ">
                 {banner.title}

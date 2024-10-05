@@ -4,7 +4,7 @@ export const ThemeContext = createContext();
 
 const ThemeProvider = ({ children }) => {
  
-  const [theme, setTheme] = useState( "light")
+  const [theme, setTheme] = useState( "dark")
 
   useEffect(() => {
     const root = document.documentElement;

@@ -2,6 +2,7 @@
 import React from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css'; // Carousel styles
+import Footer from '../Component/Footer';
 
 const HealthAwareness = () => {
   const healthTips = [
@@ -16,14 +17,14 @@ const HealthAwareness = () => {
       <h1 className="text-4xl font-bold text-center my-8">Health Awareness & Tips</h1>
 
       <section className="campaign">
-        <h2 className="text-3xl font-semibold mb-4">Featured Health Campaigns</h2>
+        <h2 className="text-3xl font-semibold mb-4 rounded-md">Featured Health Campaigns</h2>
         <Carousel showThumbs={false} autoPlay={true} infiniteLoop={true}>
           <div>
-            <img src="https://i.ibb.co.com/4d38wzJ/julia-koblitz-Rl-OAw-Xt2f-EA-unsplash.jpg" alt="Campaign 1" />
+            <img className='rounded-md' src="https://i.ibb.co.com/4d38wzJ/julia-koblitz-Rl-OAw-Xt2f-EA-unsplash.jpg" alt="Campaign 1" />
             <p className="legend">Heart Health Month - Checkups for cardiovascular disease prevention.</p>
           </div>
           <div>
-            <img src="https://i.ibb.co.com/KFk2cZk/louis-reed-pwc-KF7-L4-no-unsplash.jpg" alt="Campaign 2" />
+            <img className='rounded-md' src="https://i.ibb.co.com/KFk2cZk/louis-reed-pwc-KF7-L4-no-unsplash.jpg" alt="Campaign 2" />
             <p className="legend">Flu Awareness - Get vaccinated for seasonal flu protection.</p>
           </div>
         </Carousel>
@@ -56,6 +57,10 @@ const HealthAwareness = () => {
           <a href="#article3" className="link link-primary">The Importance of Flu Vaccines</a>
         </p>
       </section>
+
+      <footer className='mt-8'>
+        <Footer></Footer>
+      </footer>
     </div>
   );
 };
