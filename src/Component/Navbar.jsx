@@ -19,73 +19,52 @@ const Navbar = () => {
       })
       .catch((error) => console.log(error));
   };
-
-
+const navClass = ({ isActive }) =>
+  isActive
+    ? "text-md px-4 h-8 flex items-center justify-center rounded-md bg-indigo-500 text-indigo-200 "
+    : "text-md px-4 h-8 flex items-center justify-center rounded-md border border-indigo-500 text-indigo-500 hover:bg-indigo-900 hover:text-indigo-200  transition-all duration-300";
 
   const Navlinks = (
     <>
 
-      <NavLink className={({ isActive }) =>
-        isActive
-          ? "text-md px-4 h-10 flex items-center justify-center rounded-xl bg-indigo-500 text-indigo-200"
-          : "text-md px-4 h-10 flex items-center justify-center rounded-xl border border-indigo-500 text-indigo-500 hover:bg-indigo-900 hover:text-indigo-200"
-      }
+      <NavLink className={navClass}
 
 
         to='/'>
         <li>Home</li>
       </NavLink>
-      <NavLink className={({ isActive }) =>
-        isActive
-          ? "text-md px-4 h-10 flex items-center justify-center rounded-xl bg-indigo-500 text-indigo-200"
-          : "text-md px-4 h-10 flex items-center justify-center rounded-xl border border-indigo-500 text-indigo-500 hover:bg-indigo-900 hover:text-indigo-200"
-      }
+      <NavLink className={navClass}
 
 
         to='/alltests'>
         <li>All Tests</li>
       </NavLink>
-      <NavLink className={({ isActive }) =>
-        isActive
-          ? "text-md px-4 h-10 flex items-center justify-center rounded-xl bg-indigo-700 text-indigo-200"
-          : "text-md px-4 h-10 flex items-center transition-all justify-center rounded-xl border border-indigo-500 text-indigo-500 hover:bg-indigo-900 hover:text-indigo-200"
-      }
+      <NavLink className={navClass}
 
 
         to='/healthaware'>
         <li>Health Aware</li>
       </NavLink>
-      <NavLink className={({ isActive }) =>
-        isActive
-          ? "text-md px-4 h-10 flex items-center justify-center rounded-xl bg-indigo-500 text-indigo-200"
-          : "text-md px-4 h-10 flex items-center justify-center rounded-xl border border-indigo-500 text-indigo-500 hover:bg-indigo-900 hover:text-indigo-200"
-      }
+      <NavLink className={navClass}
 
 
         to='/inquiryForm'>
         <li>Inquiry Form</li>
       </NavLink>
-      <NavLink className={({ isActive }) =>
-        isActive
-          ? "text-md px-4 h-10 flex items-center justify-center rounded-xl bg-indigo-500 text-indigo-200"
-          : "text-md px-4 h-10 flex items-center justify-center rounded-xl border border-indigo-500 text-indigo-500 hover:bg-indigo-900 hover:text-indigo-200"
-      }
+      
+      {/* <NavLink className={navClass}
 
 
         to='/services'>
         <li>Services</li>
-      </NavLink>
+      </NavLink> */}
 
 
       {
 
         user && !isAdmin && <>
 
-          <NavLink className={({ isActive }) =>
-            isActive
-              ? "text-md px-4 h-10 flex items-center justify-center rounded-xl bg-indigo-500 text-indigo-200"
-              : "text-md px-4 h-10 flex items-center justify-center rounded-xl border border-indigo-500 text-indigo-500 hover:bg-indigo-900 hover:text-indigo-200"
-          } to="/dashboard/myprofile">
+          <NavLink className={navClass} to="/dashboard/myprofile">
             <li>
               Dashboard
             </li>
@@ -95,11 +74,7 @@ const Navbar = () => {
         </>
       }
       {
-        user && isAdmin && <li><NavLink className={({ isActive }) =>
-          isActive
-            ? "text-md px-4 h-10 flex items-center justify-center rounded-xl bg-indigo-500 text-indigo-200"
-            : "text-md px-4 h-10 flex items-center justify-center rounded-xl border border-indigo-500 text-indigo-500 hover:bg-indigo-900 hover:text-indigo-200"
-        } to="/dashboard/allusers">Dashboard</NavLink></li>
+        user && isAdmin && <li><NavLink className={navClass} to="/dashboard/allusers">Dashboard</NavLink></li>
       }
     </>
   );
@@ -134,18 +109,18 @@ const Navbar = () => {
           </div>
           <Link to={"/"}>
             <a className="flex items-center gap-3 font-bold text-3xl text-indigo-500">
-              <img className="h-16 rounded-full" src="https://i.ibb.co.com/K726hs3/afb9f4cd-8613-4f36-adf5-4c3c5493030f.jpg" alt="" />
-              Diagno
+              <img className="h-10 rounded-full" src="https://i.ibb.co.com/K726hs3/afb9f4cd-8613-4f36-adf5-4c3c5493030f.jpg" alt="" />
+              <span>DIAGNO</span>
             </a>
           </Link>
         </div>
 
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal text-lg text-indigo-500 gap-2">{Navlinks}</ul>
+          <ul className="menu menu-horizontal text-lg text-indigo-500 gap-2 transition-all duration-1000">{Navlinks}</ul>
         </div>
 
         <div className="navbar-end gap-5">
-          <div>
+          <div className=" flex flex-col text-center">
             <label className="swap swap-rotate">
               {/* this hidden checkbox controls the state */}
               <input
@@ -157,7 +132,7 @@ const Navbar = () => {
 
               {/* sun icon */}
               <svg
-                className="swap-off fill-current w-10 h-10"
+                className="swap-off fill-current w-8 h-8"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
               >
@@ -166,7 +141,7 @@ const Navbar = () => {
 
               {/* moon icon */}
               <svg
-                className="swap-on fill-current w-10 h-10"
+                className="swap-on fill-current w-8 h-8"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
               >
@@ -176,12 +151,12 @@ const Navbar = () => {
           </div>
           {user ? (
             <>
-              <Link className="btn" onClick={handleSignOut}>
+              <Link className="btn min-h-10 h-10" onClick={handleSignOut}>
                 Log Out
               </Link>
             </>
           ) : (
-            <Link className="btn" to="/login">
+            <Link className="btn min-h-10 h-10" to="/login">
               Log In
             </Link>
           )}

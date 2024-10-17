@@ -1,0 +1,9 @@
+.tab-active {
+    background-color: #e0f7fa; /* Highlight color */
+    color: #00796b; /* Text color when active */
+  }
+  
+  .tab {
+    transition: background-color 0.3s ease; /* Smooth transition */
+  }
+  

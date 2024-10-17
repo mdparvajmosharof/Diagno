@@ -14,7 +14,9 @@ const Home = () => {
 
   useEffect(() => {
     document.title = "Diagno";
-    AOS.init();
+    AOS.init({
+      delay: 300
+    });
   }, []);
 
   const handleMsg = () =>{
@@ -56,7 +58,7 @@ const Home = () => {
       <Recommendation></Recommendation>
 
 
-      <div data-aos="fade-left" data-aos-easing="ease-in-sine" data-aos-duration ="1500" className="my-20 card shadow-xl rounded-xl">
+      <div data-aos="fade-left"  data-aos-easing="ease-in-sine" data-aos-duration ="1500" className="my-20 card shadow-xl rounded-xl">
         <section className="py-6   rounded-xl">
           <div className="grid max-w-6xl grid-cols-1 px-6 mx-auto lg:px-8 md:grid-cols-2 md:divide-x">
             <div className="py-6 md:py-0 md:px-6">
@@ -316,7 +318,7 @@ const Home = () => {
               <div className="flex items-center space-x-1">
                 <span className="flex-shrink-0 w-12 text-sm">5 star</span>
                 <div className="flex-1 h-4 overflow-hidden rounded-md bg-indigo-300 ">
-                  <div data-aos="fade-right" data-aos-duration ="1500" data-aos-delay="300" className="bg-indigo-700  h-4 w-5/6"></div>
+                  <div data-aos="fade-right" data-aos-duration ="1500" data-aos-delay="300" className="bg-indigo-700  h-4 rounded-md w-5/6"></div>
                 </div>
                 <span className="flex-shrink-0 w-12 text-sm text-right">
                 <CountUp end={83} enableScrollSpy/>%
@@ -325,7 +327,7 @@ const Home = () => {
               <div className="flex items-center space-x-1">
                 <span className="flex-shrink-0 w-12 text-sm">4 star</span>
                 <div className="flex-1 h-4 overflow-hidden rounded-md bg-indigo-300 ">
-                  <div data-aos="fade-right" data-aos-duration ="1500" data-aos-delay="300" className="bg-indigo-700  h-4 w-4/6"></div>
+                  <div data-aos="fade-right" data-aos-duration ="1500" data-aos-delay="300" className="bg-indigo-700  h-4 rounded-md w-4/6"></div>
                 </div>
                 <span className="flex-shrink-0 w-12 text-sm text-right">
                 <CountUp end={67} enableScrollSpy/>%
@@ -334,7 +336,7 @@ const Home = () => {
               <div className="flex items-center space-x-1">
                 <span className="flex-shrink-0 w-12 text-sm">3 star</span>
                 <div className="flex-1 h-4 overflow-hidden rounded-md bg-indigo-300 ">
-                  <div data-aos="fade-right" data-aos-duration ="1500" data-aos-delay="300" className="bg-indigo-700  h-4 w-3/6"></div>
+                  <div data-aos="fade-right" data-aos-duration ="1500" data-aos-delay="300" className="bg-indigo-700  h-4 rounded-md w-3/6"></div>
                 </div>
                 <span className="flex-shrink-0 w-12 text-sm text-right">
                 <CountUp end={50} enableScrollSpy/>%
@@ -343,7 +345,7 @@ const Home = () => {
               <div className="flex items-center space-x-1">
                 <span className="flex-shrink-0 w-12 text-sm">2 star</span>
                 <div className="flex-1 h-4 overflow-hidden rounded-md bg-indigo-300">
-                  <div data-aos="fade-right" data-aos-duration ="1500" data-aos-delay="300" className="bg-indigo-700  h-4 w-2/6"></div>
+                  <div data-aos="fade-right" data-aos-duration ="1500" data-aos-delay="300" className="bg-indigo-700  h-4 rounded-md w-2/6"></div>
                 </div>
                 <span className="flex-shrink-0 w-12 text-sm text-right">
                 <CountUp end={33} enableScrollSpy/>%
@@ -352,7 +354,7 @@ const Home = () => {
               <div className="flex items-center space-x-1">
                 <span className="flex-shrink-0 w-12 text-sm">1 star</span>
                 <div className="flex-1 h-4 overflow-hidden rounded-md bg-indigo-300">
-                  <div data-aos="fade-right" data-aos-duration ="1500" data-aos-delay="300" className="bg-indigo-700  h-4 w-1/6"></div>
+                  <div data-aos="fade-right" data-aos-duration ="1500" data-aos-delay="300" className="bg-indigo-700  h-4 rounded-md w-1/6"></div>
                 </div>
                 <span className="flex-shrink-0 w-12 text-sm text-right">
                 <CountUp end={17} enableScrollSpy/>%

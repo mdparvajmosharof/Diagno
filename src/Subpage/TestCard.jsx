@@ -19,15 +19,19 @@ const TestCard = ({ test, index }) => {
   const { user, loading } = useUser();
 
   // Array of AOS animations
-  const animations = ['flip-down', 'fade-up', 'zoom-in', 'fade-left', 'slide-right'];
-  const getRandomAnimation = () => animations[Math.floor(Math.random() * animations.length)];
+  const animations = ['fade-down-right','fade-down',"fade-down-left", "flip-right", 'zoom-in', 'flip-left',"fade-up-right", 'fade-up',"fade-up-left"];
   const animation = animations[index % animations.length];
 
   const svgs = [svg1, svg2, svg3, svg4, svg5, svg6];
   const ranSvgs = () => svgs[Math.floor(Math.random() * svgs.length)];
 
   if (loading) {
-    return <Loading />;
+    return <div className="flex w-full flex-col gap-4">
+    <div className="skeleton h-32 w-full"></div>
+    <div className="skeleton h-4 w-28"></div>
+    <div className="skeleton h-4 w-full"></div>
+    <div className="skeleton h-4 w-full"></div>
+  </div>
   }
 
   useEffect(() => {
@@ -35,14 +39,14 @@ const TestCard = ({ test, index }) => {
   }, []);
 
   return (
-    <div data-aos={animation} data-aos-duration="1500" className="card card-compact max-w-sm rounded-lg shadow-xl hover:shadow-2xl dark:shadow-blue-800 transition-shadow duration-300 border border-indigo-200 dark:border-indigo-700">
+    <div data-aos={animation} data-aos-duration="1500" className="card card-compact max-w-sm rounded-lg shadow-lg hover:shadow-2xl dark:shadow-blue-950 transition-shadow duration-300 border border-indigo-200 dark:border-indigo-700">
       <figure className="overflow-hidden rounded-t-lg">
-        <img className='w-full bg-blue-700 bg-opacity-20 object-cover hover:scale-105 transition-transform duration-300' src={ranSvgs()} alt={title} />
+        <img className='w-full h-72 bg-blue-700 bg-opacity-20 object-cover hover:scale-105 transition-transform duration-300' src={ranSvgs()} alt={title} />
       </figure>
       <div className="card-body p-6">
         <div className="flex justify-between items-center">
-          <h2 className="text-xl font-semibold text-gray-800 dark:text-white">{title}</h2>
-          <div className="bg-indigo-500 text-white text-sm font-medium py-1 px-3 rounded-lg">
+          <h2 className="text-xl font-bold">{title}</h2>
+          <div className="bg-indigo-700 text-blue-100 text-sm font-medium py-1 px-3 rounded-lg">
             ${price}
           </div>
         </div>
@@ -61,7 +65,7 @@ const TestCard = ({ test, index }) => {
 
         <div className="mt-5">
           <Link to={`/testDetails/${_id}`}>
-            <button className='w-full py-2 px-4 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition-colors duration-300'>
+            <button className='w-full py-2 px-4 btn btn-primary btn-outline  font-semibold rounded-lg transition-colors duration-700'>
               View Details
             </button>
           </Link>

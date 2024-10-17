@@ -90,8 +90,11 @@ const Login = () => {
 
   };
 
-  const handleGithubLogIn = () => {
-  
+  const handleGithubLogIn = async() => {
+    if(isPopUp) return;
+
+    setIsPopUp(true);
+
     githubLogIn().then(() => {
       Swal.fire({
         icon: "success",
@@ -103,7 +106,7 @@ const Login = () => {
     }).catch(() => {
       Swal.fire({
         icon: "error",
-        title: "Log In Error!",
+        title: "Log In Error! Try Google Log In",
         showConfirmButton: false,
         timer: 1500,
       });

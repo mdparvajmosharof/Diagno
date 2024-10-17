@@ -9,6 +9,7 @@ import 'swiper/css/pagination';
 import './Home/alltests.css'
 
 import { Pagination } from 'swiper/modules';
+import { div } from 'framer-motion/client';
 
 const AllTests = () => {
   const axiosPublic = useAxiosPublic();
@@ -54,53 +55,103 @@ const AllTests = () => {
 
 
   if (loading) {
-    return <Loading></Loading>
+    return (
+      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 my-5 mx-12 md:mx-0'>
+        <div className="flex w-full flex-col gap-4">
+          <div className="skeleton h-64 w-full"></div>
+          <div className="skeleton h-4 w-28"></div>
+          <div className="skeleton h-4 w-full"></div>
+          <div className="skeleton h-4 w-full"></div>
+        </div>
+        <div className="flex w-full flex-col gap-4">
+          <div className="skeleton h-64 w-full"></div>
+          <div className="skeleton h-4 w-28"></div>
+          <div className="skeleton h-4 w-full"></div>
+          <div className="skeleton h-4 w-full"></div>
+        </div>
+        <div className="flex w-full flex-col gap-4">
+          <div className="skeleton h-64 w-full"></div>
+          <div className="skeleton h-4 w-28"></div>
+          <div className="skeleton h-4 w-full"></div>
+          <div className="skeleton h-4 w-full"></div>
+        </div>
+        <div className="flex w-full flex-col gap-4">
+          <div className="skeleton h-64 w-full"></div>
+          <div className="skeleton h-4 w-28"></div>
+          <div className="skeleton h-4 w-full"></div>
+          <div className="skeleton h-4 w-full"></div>
+        </div>
+        <div className="flex w-full flex-col gap-4">
+          <div className="skeleton h-64 w-full"></div>
+          <div className="skeleton h-4 w-28"></div>
+          <div className="skeleton h-4 w-full"></div>
+          <div className="skeleton h-4 w-full"></div>
+        </div>
+        <div className="flex w-full flex-col gap-4">
+          <div className="skeleton h-64 w-full"></div>
+          <div className="skeleton h-4 w-28"></div>
+          <div className="skeleton h-4 w-full"></div>
+          <div className="skeleton h-4 w-full"></div>
+        </div>
+      </div>
+    )
   }
 
   return (
     <div>
-      <div className="flex justify-center mt-6 gap-2">
+      <div className="grid lg:grid-cols-5 md:grid-cols-2 grid-cols-1  mt-6 gap-3  items-center mx-10 md:mx-0">
 
-        <label className='input input-bordered flex items-center gap-2' >Date :
-          <input
-            id='date'
-            type="date"
-            value={searchDate}
-            onChange={(e) => setSearchDate(e.target.value)}
-            className="grow"
-          />
-        </label>
-
-        <label className='input input-bordered flex items-center gap-2' >Min Price :
-          <input
-            type="number"
-            value={priceRange[0]}
-            onChange={(e) => setPriceRange([e.target.value, priceRange[1]])}
-            className="grow"
+        <div>
+          <label className='label-text' ><span className='font-bold ml-1'>Date :</span>
+            <input
+              id='date'
+              type="date"
+              value={searchDate}
+              onChange={(e) => setSearchDate(e.target.value)}
+              className="input input-bordered w-full mt-1"
             />
-        </label>
+          </label>
+        </div>
 
-        <label className='input input-bordered flex items-center gap-2' >Max Price :
-          <input
-            type="number"
-            value={priceRange[1]}
-            onChange={(e) => setPriceRange([priceRange[0],e.target.value])}
-            className="grow"
-          />
-        </label>
+        <div>
+          <label className='label-text' ><span className='font-bold ml-1'>Min Price :</span>
+            <input
+              type="number"
+              value={priceRange[0]}
+              onChange={(e) => setPriceRange([e.target.value, priceRange[1]])}
+              className="input input-bordered w-full mt-1"
+            />
+          </label>
+        </div>
 
-        <label className='input input-bordered flex items-center gap-2' >Name :
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="grow"
-          />
-        </label>
+        <div>
+          <label className='label-text' ><span className='font-bold ml-1'>Max Price :</span>
+            <input
+              type="number"
+              value={priceRange[1]}
+              onChange={(e) => setPriceRange([priceRange[0], e.target.value])}
+              className="input input-bordered w-full mt-1"
+            />
+          </label>
+        </div>
 
-        <button onClick={handleSearch} className="btn btn-primary ml-2">Search</button>
+        <div>
+          <label className='label-text' ><span className='font-bold ml-1'>Name :</span>
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="input input-bordered w-full mt-1"
+            />
+          </label>
+        </div>
+
+        <div>
+          <button onClick={handleSearch} className="btn btn-primary md:mt-7 w-full btn-outline">Search</button>
+        </div>
       </div>
-      <div className='flex justify-center'>
+
+      <div className=''>
         <Swiper
           pagination={pagination}
           modules={[Pagination]}
@@ -108,7 +159,7 @@ const AllTests = () => {
         >
           {groupedTests.map((group, index) => (
             <SwiperSlide className='pb-3' key={index}>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 my-10">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 my-5 mx-12 md:mx-0">
                 {group.map((test, index) => <TestCard key={test._id} test={test} index={index}></TestCard>)}
               </div>
             </SwiperSlide>
